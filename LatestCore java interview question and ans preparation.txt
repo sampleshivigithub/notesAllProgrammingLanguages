@@ -1,0 +1,3374 @@
+https://www.geeksforgeeks.org/java-interview-questions/
+https://www.javatpoint.com/corejava-interview-questions
+
+program :
+1.Java Program to Count Number of Duplicate Words in String
+2.Java Program to Count Number of Words in Given String
+3.Java Program to Count the Number of Occurrences of Substring in a String
+4.Java Program to Count the Occurrences of Each Character in String
+5.Java Program to Merge Two String Arrays
+6.Java Program to Remove Duplicate Words from String
+7.Java Program to Reverse a String(5 ways)
+8.Java Program to Reverse Each Word of a String
+9.Java Program to Swap Two Strings
+10.How to Check if the String Contains Only Digits
+11.How to Check if the String Contains Only Letters
+12.How to Check If the String Contains Only Letters or Digits
+13.Java Program to Check if Input String is Palindrome
+14.Java Program to Find all Permutations of String
+15.How to Remove or Trim All White Spaces from a String in Java
+16.How to Remove Leading and Trailing White Space From a String in Java
+17.Java Program to Count Duplicate Characters in a String
+18.Remove Character from String in Java (Java 8)
+19.Java Program to Count Vowels and Consonants in a String (Java 8)
+20. Ways to Find First Non-Repeated Character in String in Java
+21.Java Program to Remove Duplicate Elements in an Array
+22.Java Program to Find Largest Element in an Array
+23.Java Program to Reverse an Array Without Using Another Array
+24.Java Program to Check the Equality of Two Arrays
+25.Java Program to Check Armstrong Number
+26.Java program to check prime number
+27.Java Program to Swap Two Numbers
+28.Java Program to Find Factorial of a Number
+29.Java Program to Reverse a Number
+30.Java Program to Swap Two Strings Without Using Third Variable
+
+1.Comparing interfaces and abstract classes in Java
+2.When to use abstract class and when to use interface?
+3.Differences Between Interface And Abstract Class After Java 8 :
+4.difference between shallow and deep cloning in java:
+5.Stack?
+6.Queue?
+7.what i SOLID principles | Disadvantages | advantage
+8.differece between collection.syncronized map and concurrenthashmap:
+9.What's the Difference Between Iterator and ListIterator?
+10.Difference Between LinkedHashMap and HashMap
+11.JDK,JRE and JVM difference:
+12.polymporphism?
+13.Vector?
+14.Different abstract class and interface:
+15.Type of Memory in java?
+16.Thread & Join and wait and sleep() in multithreading?
+17.Reflection API?
+18. The main difference between the map and flatMap is the return type
+19.Why use overriding hashcode() and equals()?
+20.Following are the notable differences between HashMap and ConcurrentHashMap classes in Java.
+21.Autoboxing and Unboxing:
+22.What is ENUM in java?
+23.internal implemenatation of Hahmap
+24.what are Class loader ,it's type?
+25.Difference between fail-fast and fail safe in Java
+26.What is time complexity of HashMap.get() time complexcity.
+27.How many type we can create object in java.
+28.Why String  is immutable?
+29.Difference between String and StringBuffer
+30.Different between String and StringBuffer and StringBuilder
+31.what is the difference between array list and linked list?
+32.Difference between equals and hashcode?
+33.Difference between comparator and comparable?
+34.What is the difference between final, finally, and finalize?
+35.what is the difference between  class variables and instance variables?
+36.What is volatile?
+37.Dif ference between hashmap and hash table?
+38. JAva  OOPS features
+Encapsulation,Enheritance,Polymorphism,Abstraction
+
+
+
+		
+Dif ference between hashmap and hash table?
+Hashmap:-
+● HashMap is a class given in 1.2 jdk
+● hashMap is non Synchronized
+● it is not thread safe because of single thread
+● hashmap allows one null key and multiple null values
+● hasmap is faster than hash table
+● to synchronize the hashmap we can call the method as collections.synchronizedMap(hashMap);
+● HashMap inherits AbstractMap class
+● HashMap is traversed by Iterator, means hashmap is get through iterator
+● Iterator in hashmap is fail-fast.
+
+Java HashMap isn’t thread-safe, for the multithreaded environment, you must use ConcurrentHashMap category or get a synchronous
+ map using Collections.synchronizedMap() method.
+
+
+HashTable:-
+● hashTable is legacy class.(jdk 1.1)
+● hashTable is synchronized.
+● It is thread safe because multi threaded object
+● hashTable doesn’t allows any null key or values
+● hashTable is slower than HashMap
+● hashTable is internally synchronized and can’t be unsynchronized
+● hashTable inherits from Dictionary class
+● HashTable is traversed by enumerator and iterator, means hashtable data getting through enumerator and iterator.
+● Enumerator in hashTable is not fail-fast.
+* Initial capaciy of hastable=11,LF=0.75
+* work same as hashmap internally
+
+example
+import java.util.Hashtable;
+
+public class HashTableDemo {
+
+	public static void main(String[] args) {
+
+		   Hashtable<String,Integer> marks=new Hashtable<String,Integer>();
+		   marks.put("Sawan",100);
+		   marks.put("Raja",300);
+		   marks.put("DK",400);
+		   marks.put("Mohan",500);
+		   marks.put("Sohan",600);
+		   marks.put("Raju",700);
+		   
+		   System.out.println(marks.get("Sawan"));
+		   System.out.println(marks.get("Raju"));
+		   System.out.println(marks.get("Mohan"));
+	}
+}
+
+
+
+What is volatile?
+​Volatile is a keyword .
+Difference between volatile and transient?
+A volatile keyword is used in a multithreading environment where two threads reading and writing the same variable simultaneously. 
+The volatile keyword flushes the changes directly to the main memory instead of the CPU cache.
+
+On the other hand, the transient keyword is used during serialization. Fields that are marked as transient can not be part of the serialization and
+ deserialization. We don't want to save the value of any variable then we use transient keyword with that variable. 
+
+1 Basic 
+:- Volatile keyword is used to flush changes directly to the main memory
+:- The transient keyword is used to exclude variable during serialization
+2. Default value 
+:- Volatile are not initialized with a default value.
+:- During deserialization, transient  variables are initialized with a default value 
+3.Static 
+Volatile can be used with a static variable.
+Transient can not be used with the static keyword
+4 Final 
+Volatile can be used with the final keyword
+Transient can not be used with the final keyword
+private transient <member variable>;  
+class Test implements Serializable
+{
+    // Making password transient for security
+    private transient String password;
+  
+    // Making age transient as age is auto-
+    // computable from DOB and current date.
+    transient int age;
+  
+    // serialize other fields
+    private String username, email;
+    Date dob;
+  
+    // other code
+}
+
+package com.sawan;
+class App extends Thread
+{
+	
+	private volatile boolean runing=true;
+	public void run()
+	{
+		System.out.println("calling run");
+		while(runing)
+		{
+			System.out.println("running");
+			try
+			{
+				Thread.sleep(50);
+			}catch(InterruptedException e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+public void shutdown()
+{
+	System.out.println("After calling shutdown");
+	this.runing=false;
+}
+}
+public class Volatile {
+
+	public static void main(String[] args) throws InterruptedException {
+      
+	App app=new App();
+	app.start();
+	Thread.sleep(500);
+	
+	app.shutdown();		
+	}
+}
+
+what is the difference between  class variables and instance variables?
+Class variable means global variable which is used in class level(anywhere in the class)
+Instance variable means method level .
+
+While methods represent the behavior of an object, variables represent the state of an object. Variables may be of two types – Class variables and 
+Instance Variables. Class variables are common to all instances of that a class where as instance variables are specific to an object. 
+1) Class variables, also called as static variables, are declared with the keyword static.
+class StaticVariables
+{
+    static int i;        //Static Variable
+     
+    static String s;     //Static Variable
+}
+2) Class variables are common to all instances of that class i.e these variables will be shared by all objects of that class. Hence, changes made to these 
+variables through one object 
+will reflect in all objects.
+class ClassVariables
+{
+    static int i = 10;        //Static Variable
+     
+    static String s = "STATIC";     //Static Variable
+}
+ 
+public class MainClass 
+{   
+    public static void main(String[] args) 
+    {   
+        ClassVariables obj1 = new ClassVariables();
+         
+        ClassVariables obj2 = new ClassVariables();
+         
+        //accessing class variables through obj1
+         
+        System.out.println(obj1.i);      //Output : 10
+         
+        System.out.println(obj1.s);      //Output : STATIC
+         
+        //accessing class variables through obj2
+         
+        System.out.println(obj2.i);      //Output : 10
+         
+        System.out.println(obj2.s);      //Output : STATIC
+         
+        //Making changes to class variables through obj2
+         
+        obj2.i = 20;
+         
+        obj2.s = "STATIC - STATIC";
+         
+        //accessing class variables through obj1
+         
+        System.out.println(obj1.i);      //Output : 20
+                 
+        System.out.println(obj1.s);      //Output : STATIC - STATIC
+                 
+        //accessing class variables through obj2
+                 
+        System.out.println(obj2.i);      //Output : 20
+                 
+        System.out.println(obj2.s);      //Output : STATIC - STATIC
+    }   
+}
+3) Class variables can be referred through class name as well as object reference.
+class A
+{
+    static int i = 100;        //Class Variable
+}
+ 
+public class MainClass 
+{    
+    public static void main(String[] args) 
+    {   
+        //Referring class variable through class name
+         
+        System.out.println(A.i);
+         
+        A a = new A();
+         
+        //Referring class variable through object reference
+         
+        System.out.println(a.i);
+    }   
+}
+
+Instance Variables In Java :
+1) Instance variables, also called as non-static variables are declared without static keyword.
+class InstanceVariables
+{    int i;        //Instance Variable     
+    String s;     //Instance Variable
+}
+2) Instance variables are not common to all instances of a class. Each object will maintain it’s own copy of instance variables. 
+Hence, changes made to instance variables through one object will not reflect in another object
+class InstanceVariables
+{
+    int i = 10;        //Instance Variable
+     
+    String s = "NON-STATIC";     //Instance Variable
+}
+ 
+public class MainClass 
+{   
+    public static void main(String[] args) 
+    {   
+        InstanceVariables obj1 = new InstanceVariables();
+         
+        InstanceVariables obj2 = new InstanceVariables();
+         
+        //obj1 instance variables
+         
+        System.out.println(obj1.i);       //Output : 10
+         
+        System.out.println(obj1.s);       //Output : NON-STATIC
+         
+        //obj2 instance variables
+         
+        System.out.println(obj2.i);       //Output : 10
+         
+        System.out.println(obj2.s);       //Output : NON-STATIC
+         
+
+        //changing obj1 instance variables
+         
+        obj1.i = 20;
+         
+        obj1.s = "INSTANCE VARIABLE";
+         
+        //obj1 instance variables
+         
+        System.out.println(obj1.i);       //Output : 20
+                 
+        System.out.println(obj1.s);       //Output : INSTANCE VARIABLE
+                 
+        //obj2 instance variables
+                 
+        System.out.println(obj2.i);       //Output : 10
+                 
+        System.out.println(obj2.s);       //Output : NON-STATIC
+    }   
+}
+3) Instance variables can be referred only through object reference.
+class A
+{
+    int i = 100;        //Instance Variable
+}
+ 
+public class MainClass 
+{   
+    public static void main(String[] args) 
+    {   
+        A a = new A();
+         
+        //Referring instance variable through object reference
+         
+        System.out.println(a.i);
+         
+        //You can't refer instance variable through class name, you will get compile time error
+         
+        //System.out.println(A.i);
+    }   
+}
+Difference Between Class Variables And Instance Variables In Java :
+Class Variables
+1. Class variables are declared with keyword static.
+2.Class variables are common to all instances of a class. These variables are shared between the objects of a class
+3. As class variables are common to all objects of a class, changes made to these variables through one object will reflect in another.
+4.Class variables can be accessed using either class name or object reference.
+Instance Variables
+1. Instance variables are declared without static keyword.
+2.Instance variables are not shared between the objects of a class. Each instance will have their own copy of instance variables.
+3.As each object will have its own copy of instance variables, changes made to these variables through one object will not reflect in another object.
+4.Instance variables can be accessed only through object reference.
+
+What is the difference between final, finally, and finalize?
+Final:
+● Final is a keyword
+● Final is used to apply restrictions on class, methods and variable
+● Final class cannot inherited
+● Final method can’t overridden
+● Final variable can’t be changed
+private final String halo = "Hello World!";
+
+Finally:-
+● Finally is a block
+● Finally block is executed always
+Finally is a code block. It is used with try-catch block for handling exception. finally code block will be executed whether exception is handled or not
+try {
+  //code here
+} catch (SomeException se) {
+  //handle exception here
+} finally {
+  //always executed this code block
+}
+
+Finalize:-
+● Finalize is a method
+● Finalize is used to perform clean up processing just before object is garbage collected.
+Finalize is a method of Object class. It is invoked before an object is discarded by the garbage collector , allowing it to clean up its state.
+protected void finalize() {
+  //free resources here
+  super.finalize();
+}
+
+/ Java code to show the
+// overriding of finalize() method
+  
+import java.lang.*;
+  
+// Defining a class demo since every java class
+// is a subclass of predefined Object class
+// Therefore demo is a subclass of Object class
+public class demo {  
+    protected void finalize() throws Throwable
+    {
+        try {
+  
+            System.out.println("inside demo's finalize()");
+        }
+        catch (Throwable e) {
+  
+            throw e;
+        }
+        finally {
+  
+            System.out.println("Calling finalize method"
+                               + " of the Object class");  
+            // Calling finalize() of Object class
+            super.finalize();
+        }
+    }
+  
+    // Driver code
+    public static void main(String[] args) throws Throwable
+    { 
+        // Creating demo's object
+        demo d = new demo();  
+        // Calling finalize of demo
+        d.finalize();
+    }
+}
+Output:
+inside demo's finalize()
+Calling finalize method of the Object class
+
+Difference between comparator and comparable?
+Comparable:-
+● Comparable provide single sorting sequence, means we can sort the collection on the basis of single element such as id or name or price etc.,
+● Comparable affects the original class i.e., actual class is modified
+● To sort the elements we can use the method is compareTo() method
+● Collections.sort(List);{java.lang package}
+Comparator:- ​
+● Comparator provides multiple sorting sequence, means we can sort the collection on the basis of multiple elements such as id, name and price etc.,
+● Comparator doesn’t affect the original class i.e., actual class is not modified.
+● To sort the elements we can use the method is compare() method.
+● Collections.sort(List, Comparator);{java.util package}
+
+		=============================================
+Comparable:
+-----------------------------------------------------------------------------------------------------------------
+1) Comparable is one of the pre-defined interface present in java.lang package
+2) The purpose of Comparable Interface is that to perform Sorting data of the object only one item at a time
+3)This interface contains a method : public abstract  int   compareTo(Object)
+4)  to call internally compareTo), we use Collections.sort(List)
+
+------------------------------------------------------------------------------------------------------------------------
+Comparator:
+------------------------------------------------------------------------------------------------------------------------
+1)Comparator is one of the pre-defined interface present in java.util package
+2)The purpose of Comparator Interface is that to perform Sorting data of the object on multiple items of the same class
+3)This interface contains a method : public abstract  int  compare(Object,Object)
+4)To call compare()    , we   use Collections.sort(List,Comparator)
+---------------------------------------------------------------------------------------------
+
+Comparable ex:
+package com.sawan;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+class Student   implements Comparable
+{
+	int sno;
+	String name;
+	float marks;
+	Student(int sno,String name,float marks)
+	{
+		this.sno=sno;
+		this.name=name;
+		this.marks=marks;
+	}
+	public int compareTo(Object obj)
+	{		           //This functions receives two objects data first. First object data kept in current class object (this)
+                                   and second object data placed into formal param.
+		Student so1=(Student)obj;   
+		if(this.sno==so1.sno)
+			return 0;
+		else
+		{
+			 if(this.sno>so1.sno)
+				 return 1;
+				else
+				 return -1;
+		}//else
+	}//compareTo()
+	static void   dispStudInfo(ArrayList<Student> al)
+	{
+		Iterator<Student> itr=al.iterator();
+		while(itr.hasNext())
+		{
+			Student s=itr.next();
+			System.out.println(s.sno+"\t"+s.name+"\t"+s.marks);
+		}
+	}//dispStudInfo()
+}//Student---BLC
+public class ComparableEx2 {
+
+	public static void main(String[] args) {
+		Student s1=new Student(101,"Trump",34.44f);
+		Student s2=new Student(12,"Jobiden",44.44f);
+		Student s3=new Student(60,"Obama",74.44f);
+		Student s4=new Student(90,"Bush",64.74f);
+		Student s5=new Student(65,"Clinton",66.66f);
+//add the objects data to CFW object
+		ArrayList <Student> al=new ArrayList<Student>();
+		al.add(s1);
+		al.add(s2);
+		al.add(s3);
+		al.add(s4);
+		al.add(s5);
+		System.out.println("---------------------------------------------");
+		System.out.println("Original Student Data");
+		System.out.println("---------------------------------------------");
+		System.out.println("Number\tName\tMarks");
+		System.out.println("---------------------------------------------");
+		Student.dispStudInfo(al);
+		System.out.println("---------------------------------------------");
+
+		Collections.sort(al);//calls internall compareTo() of Student class--Student object data sorted based on student number
+		System.out.println("Sorted Student Data Based Student Number--ASC Order");
+
+		System.out.println("---------------------------------------------");
+		System.out.println("Number\tName\tMarks");
+		System.out.println("---------------------------------------------");
+		Student.dispStudInfo(al);
+		System.out.println("---------------------------------------------");
+	}
+}
+
+
+Comparator Example:
+package com.sawan;
+import java.util.*;
+class Employee
+{
+	int empno;
+	String ename;
+	float sal;
+	Employee (int empno,String ename,float sal)
+	{	this.empno=empno;
+		this.ename=ename;
+		this.sal=sal;
+	}
+}//Employee---BLC
+class EmpDisplay
+{
+	static  void  dispInfo(List<Employee> l)
+	{
+		Iterator<Employee> itr=l.iterator();
+		while(itr.hasNext())
+		{
+			Employee e=itr.next();
+			System.out.println(e.empno+"\t\t"+e.ename+"\t\t"+e.sal);
+		}//while
+	}//dispInfo
+}//EmpDisplay---BLC
+class SortByEmpno1 implements Comparator
+{
+	public int compare(Object obj1,Object obj2)
+	{
+		Employee eo1=(Employee)obj1;
+		Employee eo2=(Employee)obj2;
+		return (eo1.empno-eo2.empno); //ASC order
+	}
+}//SortByEmpno1--BLC
+class SortByEmpno2 implements Comparator
+{
+	public int compare(Object obj1,Object obj2)
+	{
+		Employee eo1=(Employee)obj1;
+		Employee eo2=(Employee)obj2;
+		return (eo2.empno-eo1.empno); //DESC order
+	}
+}//SortByEmpno2--BLC
+class SortByNames1 implements Comparator
+{
+	public int compare(Object obj1,Object obj2)
+	{
+		Employee eo1=(Employee)obj1;
+		Employee eo2=(Employee)obj2;
+		return (eo1.ename.compareTo(eo2.ename)); //ASC  order
+	}
+}//SortByNames1---BLC
+class SortByNames2 implements Comparator
+{
+	public int compare(Object obj1,Object obj2)
+	{
+		Employee eo1=(Employee)obj1;
+		Employee eo2=(Employee)obj2;
+		return (eo2.ename.compareTo(eo1.ename)); //DESC  order
+	}
+}//SortByNames2---BLC
+class SortBySal1 implements Comparator
+{
+	public int compare(Object obj1,Object obj2)
+	{
+		Employee eo1=(Employee)obj1;
+		Employee eo2=(Employee)obj2;
+		if(eo1.sal==eo2.sal)    //ASC order logic
+			 return 0;
+		else
+		{
+			  if(eo1.sal>eo2.sal)
+				  return 1;
+			  else
+				  return -1;
+		}//else
+	}//compare()
+}//SortBySal1---BLC 
+class SortBySal2 implements Comparator
+{
+	public int compare(Object obj1,Object obj2)
+	{
+		Employee eo1=(Employee)obj1;
+		Employee eo2=(Employee)obj2;
+		if(eo1.sal==eo2.sal)    //DESC order logic
+			 return 0;
+		else
+		{
+			  if(eo2.sal>eo1.sal)
+				  return 1;
+			  else
+				  return -1;
+		}//else
+	}//compare()
+}//SortBySal2---BLC 
+public class ComparatorEx1 {
+
+	public static void main(String[] args) {
+
+		Employee eo1=new Employee(100,"ashish",2.3f);
+		Employee eo2=new Employee(20,"mahesh",3.3f);
+		Employee eo3=new Employee(60,"sipun",4.3f);
+		Employee eo4=new Employee(40,"naveen",5.4f);
+		Employee eo5=new Employee(50,"vishal",2.0f);
+//add the employee objects to CFW object
+		List<Employee> l=new ArrayList<Employee>();
+		l.add(eo1);
+		l.add(eo2);
+		l.add(eo3);
+		l.add(eo4);
+		l.add(eo5);
+		System.out.println("---------------------------------------------");
+		System.out.println("Original Employee Data");
+		System.out.println("---------------------------------------------");
+		System.out.println("EmpNumber\tEmpName\t\tEmpSalary");
+		System.out.println("---------------------------------------------");
+		EmpDisplay.dispInfo(l);
+		System.out.println("---------------------------------------------");
+
+		//call Collections.sort()
+		SortByEmpno1 s1=new SortByEmpno1();
+		Collections.sort(l,s1);
+		System.out.println("Employee Data--sorted By Empno----ASC Order");
+
+		System.out.println("---------------------------------------------");
+		System.out.println("EmpNumber\tEmpName\t\tEmpSalary");
+		System.out.println("---------------------------------------------");
+		EmpDisplay.dispInfo(l);
+		System.out.println("---------------------------------------------");
+
+		SortByEmpno2 s2=new SortByEmpno2();
+		Collections.sort(l,s2);
+		System.out.println("Employee Data--sorted By Empno----DESC Order");
+
+		System.out.println("---------------------------------------------");
+		System.out.println("EmpNumber\tEmpName\t\tEmpSalary");
+		System.out.println("---------------------------------------------");
+		EmpDisplay.dispInfo(l);
+		System.out.println("---------------------------------------------");
+		SortByNames1 s3=new SortByNames1();
+		Collections.sort(l,s3);
+		System.out.println("Employee Data--sorted By Emp Name----ASC Order");
+		System.out.println("---------------------------------------------");
+		System.out.println("EmpNumber\tEmpName\t\tEmpSalary");
+		System.out.println("---------------------------------------------");
+		EmpDisplay.dispInfo(l);
+		System.out.println("---------------------------------------------");
+		SortByNames2 s4=new SortByNames2();
+		Collections.sort(l,s4);
+		System.out.println("Employee Data--sorted By Emp Name----DESC Order");
+		System.out.println("---------------------------------------------");
+		System.out.println("EmpNumber\tEmpName\t\tEmpSalary");
+		System.out.println("---------------------------------------------");
+		EmpDisplay.dispInfo(l);
+		System.out.println("---------------------------------------------");
+		SortBySal1 s5=new SortBySal1();
+		Collections.sort(l,s5);
+		System.out.println("Employee Data--sorted By Emp Salary----ASC Order");
+		System.out.println("---------------------------------------------");
+		System.out.println("EmpNumber\tEmpName\t\tEmpSalary");
+		System.out.println("---------------------------------------------");
+		EmpDisplay.dispInfo(l);
+		System.out.println("---------------------------------------------");
+
+		SortBySal2 s6=new SortBySal2();
+		Collections.sort(l,s6);
+
+		System.out.println("Employee Data--sorted By Emp Salary----DESC Order");
+
+		System.out.println("---------------------------------------------");
+		System.out.println("EmpNumber\tEmpName\t\tEmpSalary");
+		System.out.println("---------------------------------------------");
+		EmpDisplay.dispInfo(l);
+		System.out.println("---------------------------------------------");
+	}
+}
+
+Difference between equals and hashcode?
+​HashCode is the unique identification of an object generating by JVM based on the original base address.
+​HashCode is a 32-bit  positive random integer number.
+​To get the JVM generated HashCode of an object we can use object class hashCode() method (OR) System class identityHashCode() method  
+Object Class :-
+​Public native int hashCode();
+System Class:-
+​public static native int identityHashCode(object obj);
+hashCode() is a method of Object class. Hash code is an integer representation of an object by JVM.
+
+The equals() method, as we know earlier, compares two strings or characters.
+For comparison
+The java equals() is a method of lang.Object class, and it is used to compare two objects.
+To compare two objects that whether they are the same, it compares the values of both the object's attributes.
+By default, two objects will be the same only if stored in the same memory location
+
+Just Test look into the picture with the help of following program:
+
+public class Test{
+
+public static void main(String args[]){
+
+     Test t1 = new Test();
+     Test t2 = new Test();
+     System.out.println(t1.getClass());
+     int a = t1.hashCode();
+     int b = t2.hashCode();
+     System.out.println("t1 object hash code: " + a);
+     System.out.println("t2 object hash code: " + b);
+    if(t1.equals(t2))
+     System.out.println("t1 and t2 refers the same");
+    else
+        System.out.println("t1 and t2 does not refer the same");
+    Test t3, t4;
+    t3 = t1;
+    t4 = t1;
+    if(t3.equals(t4))
+        System.out.println("t3 and t4 refers the same");
+  else
+      System.out.println("t3 and t4 does not refer the same");
+}
+
+}
+what is the difference between array list and linked list?
+Arraylist:
+​​It is an resizable array
+​​Faster in accessing the data
+​​Slower in insertion and deletion of the data
+
+Linked List:-
+​​Double linked list
+​​Slower in accessing the data
+​​Faster in insertion and deletion of the data
+ArrayList vs LinkedList:
+Parameter                                            ArrayList                                                      LinkedList
+Internal data structure                           It uses dynamic array to store elements internally                It uses doubly Linked List to store elements internally
+
+Manipulation                                         slower	                                                      faster
+Search                                            Search is faster in ArrayList as uses array                         Search is slower in LinkedList as uses doubly Linked List
+                                                  internally which is index based.                                    internally 
+Interfaces                                        ArrayList implements List interface only, So it can be used          LinkedList implements List,Deque interfaces, so it can be used as List,Stack or Queue
+                                                   as List only                           
+                                                  ArrayList is better for storing and accessing data.                  LinkedList is better for manipulating data.
+                                                 ArrayList internally uses a dynamic array to store the elements.      LinkedList internally uses a doubly linked list to store the elements.
+
+Different between String and StringBuffer and StringBuilder
+The String class is an immutable class whereas StringBuffer and StringBuilder classes are mutable.
+             StringBuffer                                                                   StringBuilder
+                                                                 
+1. .StringBuffer is synchronized i.e. thread safe. It means two         StringBuilder is non-synchronized i.e. not thread safe. It means two threads can call the methods of 
+threads can't call  the methods of StringBuffer simultaneously          StringBuilder simultaneously.
+2.   StringBuffer is less efficient than StringBuilder.                 StringBuilder is more efficient than StringBuffer.
+3. StringBuffer was introduced in Java 1.0                              StringBuilder was introduced in Java 1.5
+
+//Java Program to demonstrate the use of StringBuffer class.  
+public class BufferTest{  
+    public static void main(String[] args){  
+        StringBuffer buffer=new StringBuffer("hello");  
+        buffer.append("java");  
+        System.out.println(buffer);  
+    }  
+}  
+//Java Program to demonstrate the use of StringBuilder class.  
+public class BuilderTest{  
+    public static void main(String[] args){  
+        StringBuilder builder=new StringBuilder("hello");  
+        builder.append("java");  
+        System.out.println(builder);  
+    }  
+}  
+
+Difference between String and StringBuffer
+String                                                                            StringBuffer
+1. The String class is immutable.                                         1. The StringBuffer class is mutable.
+2.  String is slow and consumes more memory when we concatenate            2. StringBuffer is fast and consumes less memory when we concatenate too many strings.
+   too many strings because every time it creates new instance.
+3. String class overrides the equals() method of Object class. So you    3. StringBuffer class doesn't override the equals() method of Object class 
+can compare the contents of two strings by equals() method
+4. String class is slower while performing concatenation operation.      4.  StringBuffer class is faster while performing concatenation operation.
+5. String class uses String constant pool.                               5.  StringBuffer uses Heap memory
+6. String object is given as immutable                                   6. String Buffer is given as mutable not meant for storingin map object as key.
+   to store as a key in map object
+
+ class Testimmutablestring{
+ public static void main(String args[]){
+   String s="Sachin";
+   s.concat(" Tendulkar");//concat() method appends the string at the end
+   System.out.println(s);//will print Sachin because strings are immutable objects
+ }
+}
+
+Why String  is immutable?
+In java there is a “String constant pool” in the heap memory which contains all the strings which we create. For instance if we create 
+two objects(A and B) of String class and give both of them the same value:-
+String A=“Hello”;  String B=“Hello”;
+When ‘A’ is created, It searches whether “Hello” is already present in the string pool. Initially string pool is empty so “Hello” is created in the pool and 
+a reference to the string is passed to object A.
+Now when ‘B’ is created, String pool already contains “Hello” so no new string is created rather a reference to the string which is already present is passed 
+to object B.
+String A=“Hello”;    
+String B=“Hello”;     heap memory ->withing heap memory   ->  Hello  :Spring Pool contains String value
+
+Now if Strings would be mutable then updating the value of A to some other value(Say “hell”) would result in the situation like this:-
+String A=“Hell”;    
+String B=“Hello”;
+heap memory ->withing heap memory   ->  Hell  :Spring Pool contains String value
+B’s value automatically gets updated to “hell” even if we just updated A.
+For this reason Strings Are Immutable in JAVA
+What actually happens is that a new string “hell” is created(as it is not already present in the pool) and its reference is passed to A.
+String A=“Hell”;    
+String B=“Hello”;
+heap memory ->withing heap memory   ->  Hell Hello  :Spring Pool contains String value
+
+Following are reason:
+1. Thread Safe:
+As the String object is immutable we don't have to take care of the synchronization that is required while sharing an object across multiple threads.
+2.  ClassLoader
+A ClassLoader in Java uses a String object as an argument. Consider, if the String object is modifiable, the value might be changed and the class that
+ is supposed to be loaded might be different.
+To avoid this kind of misinterpretation, String is immutable.
+3. Security:
+As we have seen in class loading, immutable String objects avoid further errors by loading the correct class. This leads to making the application
+ program more secure. Consider an example of banking software. The username and password cannot be modified by any intruder because String objects 
+are immutable. This can make the application program more secure.
+4. Heap Space:
+The immutability of String helps to minimize the usage in the heap memory. When we try to declare a new String object, the JVM checks whether the value
+ already exists in the String pool or not. If it exists, the same value is assigned to the new object. This feature allows Java to use the heap 
+space efficiently.
+As Java uses the concept of String literal. Suppose there are 5 reference variables, all refer to one object "Sachin". 
+If one reference variable changes the value of the object, it will be affected by all the reference variables. That is
+ why String objects are immutable in Java.
+
+How many type we can create object in java.
+ 
+There are five different ways to create an object in Java:
+Java new Operator
+Java Class.newInstance() method
+Java newInstance() method of constructor
+Java Object.clone() method
+Java Object Serialization and Deserialization
+
+1) Java new Operator
+This is the most popular way to create an object in Java. A new operator is also followed by a call to constructor which initializes the new object.
+ While we create an object it occupies space in the heap.
+Syntax:-  class_name object_name = new class_name()  
+public class A  
+{  
+     String str="hello";  
+     public static void main(String args[])  
+     {  
+          A obj=new A();  //creating object using new keyword  
+          System.out.println(obj.str); 
+     }  
+}  
+
+2) Java Object Creation by newInstance() method of Class class
+This is another technique to create an object of the class. We use the newInstance() method of a Class class to create an object. 
+This newInstance() method calls the no-arg constructor of the class to create the object.
+Syntax to create an object by a newInstance() of Class:
+Class cls = Class.forName("ClassName");
+ClassName objectName = (ClassName) cls.newInstance();
+Code to create an object using the newInstance() method of Class:
+package com.techvidvan.objectcreation;
+public class NewInstanceMethod
+{
+  String name = "TechVidvan Java Tutorial";
+  public static void main(String[] args)
+  {
+    try
+    {
+      Class cls =Class.forName("com.techvidvan.objectcreation.NewInstanceMethod");
+      NewInstanceMethod obj =(NewInstanceMethod) cls.newInstance();
+      System.out.println(obj.name);
+    }
+    catch (Exception e)
+    {
+      e.printStackTrace();
+    }
+  }
+}
+
+
+
+
+
+
+3) Java newInstance() method of Constructor class
+Java Constructor class also has a newInstance() method similar to newInstance() method of Class class. The newInstance() method belongs to
+ java.lang.reflect.Constructor class. Both newInstance() method are known as reflective ways to create object. In fact the newInstance() method of Class class
+internally uses newInstance() method of Constructor class. The method returns a new object created by calling the constructor.
+
+Syntax of using newInstance() method of Constructor class:
+Constructor<ClassName> constructor = ClassName.class.getConstructor();
+ClassName objectName = constructor.newInstance();
+import java.lang.reflect.Constructor;  
+public class NewInstanceExample1  
+{  
+    String str="hello";  
+    public static void main(String args[])  
+    {  
+      try  
+     {  
+              Constructor<NewInstanceExample1> obj =NewInstanceExample1.class.getConstructor();  
+              NewInstanceExample1 obj1 = obj.newInstance();  
+              System.out.println(obj1.str);  
+      }  
+     catch(Exception e)  
+     {  
+        e.printStackTrace();  
+     }  
+  }  
+}   
+
+ 4) Java Object.clone() method
+To use the clone() method on an object we have to implement the Cloneable interface and override the clone() method in our class.
+ClassName object1 = new ClassName();
+ClassName object2 = (ClassName) object1.clone();
+package com.techvidvan.objectcreation;
+public class CloneMethod implements Cloneable
+{
+  @Override
+  protected Object clone() throws CloneNotSupportedException
+  {
+    return super.clone();
+  }
+  String name = "TechVidvan Java Tutorial";
+  public static void main(String[] args)
+  {
+    CloneMethod obj1 = new CloneMethod();
+    try
+    {
+      CloneMethod obj2 = (CloneMethod) obj1.clone();
+      System.out.println(obj2.name);
+    }
+    catch (CloneNotSupportedException e)
+    {
+      e.printStackTrace();
+    }
+  }
+}
+
+5) Java Object Creation using deserialization
+package com.sawan;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+class Demo implements Serializable   
+{ 
+	 public int i;   
+     public String s;   
+     public Demo(int i, String s) //default constructor  
+     {   
+         this.i = i;   
+         this.s = s;     
+      }  
+}
+public class SerializationDeserializationExample {	
+	public static void main(String[] args) {	
+
+		Demo object = new Demo(8, "javatpoint");   
+		String filename = "Demofile.ser";       //specified file name (must have extension .ser)  
+		/*-----------------Serialization----------*/  
+		try  
+		{      
+		FileOutputStream file = new FileOutputStream(filename);  //Saving of object in the file   
+		ObjectOutputStream out = new ObjectOutputStream(file);     
+		out.writeObject(object);            //serialize object  
+		out.close();                    //closes the ObjectOutputStream  
+		file.close();                   //closes the file  
+		System.out.println("Object serialized");   
+		}   
+		catch(IOException e)   
+		{   
+     		e.printStackTrace();  
+		}   
+		Demo obj = null;   
+		/*-----------------Deserialization--------*/  
+	 try  
+	 {      
+		FileInputStream file = new FileInputStream(filename); // reading an object from a file   
+		ObjectInputStream is = new ObjectInputStream(file);   
+		obj = (Demo)is.readObject();        //deserialize object  
+		is.close();                     //closes the ObjectInputStream  
+		file.close();                   //closes the file  
+		System.out.println("Object deserialized ");   
+		System.out.println("number = " + obj.i);   
+		System.out.println("string = " + obj.s);   
+	  }   
+	catch(IOException e)   
+	{   
+	      	System.out.println("IOException is caught");   
+	}   
+	catch(ClassNotFoundException e)   
+	{   
+	       	System.out.println("ClassNotFoundException is caught");   
+	}  
+   }   
+}  
+
+What is time complexity of HashMap.get() time complexcity.
+   :This question is perfectly valid. Hashmap put and get operation time complexity is O(1) with assumption that 
+    key-value pairs are well distributed across the buckets. It means hashcode implemented is good.
+    Hashmap best and average case for Search, Insert and Delete is O(1) and worst case is O(n).
+		
+Different between vector and arraylist?
+Both ArrayList and Vector are implementation of List interface in Java. Both classes keeps the insertion order. But there are certain differences as well
+
+Sr.No.   Key                                     ArrayList                                                 Vector
+
+1  Synchronization                      ArrayList is non-synchronized.                                       Vector is synchronized.
+2 Size                 ArrayList increments 50% of its current size if element added exceeds its capacity.   Vector increments 100% of its current size if element added exceeds its capacity
+3Legacy                                      ArrayList is not legacy.                                       Vector is a legacy class. 
+4. Speed                             ArrayList is faster being non-syncronized.                              Vector is slower being syncronized.
+5.Iteration                            ArrayList uses iterator interface to traverse through elements.        Vector can use both iterator or enumerator interface to traverse through elements.
+
+mport java.util.*;    
+class TestArrayList21{    
+ public static void main(String args[]){    
+     
+  List<String> al=new ArrayList<String>();//creating arraylist    
+  al.add("Sonoo");//adding object in arraylist    
+  al.add("Michael");    
+  al.add("James");    
+  al.add("Andy");    
+  //traversing elements using Iterator  
+  Iterator itr=al.iterator();  
+  while(itr.hasNext()){  
+   System.out.println(itr.next());  
+  }    
+ }    
+} 
+
+import java.util.*;    
+class TestVector1{    
+ public static void main(String args[]){    
+  Vector<String> v=new Vector<String>();//creating vector
+  v.add("umesh");//method of Collection
+  v.addElement("irfan");//method of Vector
+  v.addElement("kumar");
+
+  Enumeration e=v.elements();
+  while(e.hasMoreElements()){
+   System.out.println(e.nextElement());
+  }
+ } 
+//traversing elements using Iterator  
+		  Iterator itr=v.iterator();  
+		  while(itr.hasNext()){  
+		       System.out.println(itr.next())
+                  }
+
+Difference between fail-fast and fail safe in Java
+
+key-Exception
+fail-fast:
+1. Any changes in the collection, such as adding, removing and updating collection during a thread are iterating collection then Fail fast throw concurrent 
+modification exception
+fail safe:
+The fail-safe collection doesn't throw exception
+2.Type of collection
+fail-fast:
+ArrayList and hashmap collection are the examples of fail-fast iterator 
+fail safe
+   CopyOnWriteArrayList and ConcurrentHashMap(concurrent modification) are the examples of a fail-safe iterator 
+3.Performance and Memory
+fail-fast:It's work on actual collection instead. So, this iterator doesn't require extra memory and time 
+fail safe:It's working on a clone of the collection instead of actual collection. It is overhead in terms of time and memory
+4.Modifications
+fail-fast:
+ Iterators don't allow modifications of a collection while iterating over it.
+fail safe:
+Fail-Safe iterators allow modifications of a collection while iterating over it.
+
+package com.sawan;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+//creating FailSafeIterator.java class   
+public class FailSafeIterator {
+	public static void main(String[] args) {
+		//creating map  
+        Map<Integer, String> students = new HashMap<Integer, String>();   
+        students.put(101, "Emma");   
+        students.put(102, "Paul");   
+        students.put(103, "Walker");  
+          
+        //creating ConcurrentHashMap by copy students map   
+        ConcurrentHashMap<Integer, String> copyStudents = new ConcurrentHashMap<Integer, String>(students);   
+          
+        //creating an instance of the Iterator class  
+        Iterator itr = copyStudents.keySet().iterator();   
+          
+        //iterating map using Iterator   
+        while (itr.hasNext()) {  
+            //printing elements of copyStudents  
+            System.out.println(copyStudents.get(itr.next()));   
+            // adding an element to copyStudents   
+            copyStudents.put(104, "Rubby"); // on the next call of next() method, exception will not be thrown.  
+        }   
+   }
+}
+
+package com.sawan;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+public class FailFastIterator {
+
+	public static void main(String[] args) {
+		 //creating map  
+        Map<Integer, String> students = new HashMap<Integer, String>();   
+        students.put(101, "Emma");   
+        students.put(102, "Paul");   
+        students.put(103, "Walker");   
+          
+        //creating an instance of the Iterator class  
+        Iterator itr = students.keySet().iterator();   
+          
+        //iterating map using Iterator   
+        while (itr.hasNext()) {  
+            //printing elements of Map  
+            System.out.println(students.get(itr.next()));   
+    
+            // adding an element to Map   
+            students.put(104, "Rubby"); // on the next call of next() method, exception will be thrown.  
+        }   
+    }   
+  }
+
+what are Class loader ,it's type?
+Class loaders are responsible for loading Java classes during runtime dynamically to the JVM (Java Virtual Machine). Also, they are part of the 
+JRE (Java Runtime Environment). Hence, the JVM doesn't need to know about the underlying files or file systems in order to run Java programs thanks to class loaders.
+Also, these Java classes aren't loaded into memory all at once, but when required by an application. This is where class loaders come into the picture. 
+They are responsible for loading classes into memory.
+In this tutorial, we're going to talk about different types of built-in class loaders, how they work and an introduction to our own custom implementation.
+Java ClassLoader is an abstract class. It belongs to a java.lang package
+
+Java ClassLoader is based on three principles: Delegation, Visibility, and Uniqueness.
+Delegation principle: It forwards the request for class loading to parent class loader. It only loads the class if the parent does not find or load the class.
+Visibility principle: It allows child class loader to see all the classes loaded by parent ClassLoader. But the parent class loader cannot see classes loaded by 
+the child class loader.
+Uniqueness principle: It allows to load a class once. It is achieved by delegation principle. It ensures that child ClassLoader doesn't 
+reload the class, which is already loaded by the parent.
+
+Bootstrap Class Loader:
+It loads standard JDK class files from rt.jar and other core classes. It is a parent of all class loaders.
+It loads class files from jre/lib/rt.jar. For example, java.lang package class.
+
+Extensions Class Loader:
+It delegates class loading request to its parent. If the loading of a class is unsuccessful, it loads classes from jre/lib/ext directory or any other 
+directory as java.ext.dirs. It is implemented by sun.misc.Launcher$ExtClassLoader in JVM.
+
+System Class Loader:
+ It loads application specific classes from the CLASSPATH environment variable. 
+ It can be set while invoking program using -cp or classpath command line options. It is a child of Extension ClassLoader. 
+It is implemented by sun.misc.Launcher$AppClassLoader class. All Java ClassLoader implements java.lang.ClassLoader.
+
+
+Different between parallel stream and normal stream?
+Sequential Streams:
+By default, any stream operation in Java is processed sequentially, unless explicitly specified as parallel. Sequential streams use a single thread to 
+process the pipeline:
+List<Integer> listOfNumbers = Arrays.asList(1, 2, 3, 4);
+listOfNumbers.stream().forEach(number ->System.out.println(number + " " + Thread.currentThread().getName()));
+he list elements will always be printed in an ordered sequence:
+parallel stream :
+Any stream in Java can easily be transformed from sequential to parallel. We can achieve this by adding the parallel method to a sequential stream or by 
+creating a stream using the parallelStream method of a collection:
+List<Integer> listOfNumbers = Arrays.asList(1, 2, 3, 4);
+listOfNumbers.parallelStream().forEach(number ->System.out.println(number + " " + Thread.currentThread().getName()));
+
+When are stream evaluated?
+Streams are evaluated when we apply to them some specific operations called terminal operation.
+forEach,forEachOrdered,toArray,reduce,collect,minmax
+count,anyMatch,allMatch,noneMatch,findFirst,findAny,iterator,spliterator
+Non terminal operations are called intermediate
+filter,map,mapTo... (Int, Long or Double)
+flatMap,atMapTo... (Int, Long or Double)
+distinct,sorted,peek,limit,skip,sequential,,parallel,nordered,onClose
+why parallelstream:?
+Parallel streams enable us to execute code in parallel on separate cores. The final result is the combination of each individual outcome. However, the order of 
+execution is out of our control. It may change every time
+The latter has the advantage of using concurrency to split the task up over modern multicore processors and speed up the iteration (although it does not guarantee 
+the order of the results).
+
+Diamond problem solve in java 8?
+What Java does not allow is multiple inheritance where one class can inherit properties from more than one class. It is known as the diamond problem. 
+In the above figure, we find that class D is trying to inherit form class B and class C, that is not allowed in Java.
+
+Internal implementation of hashset?
+It stores unique elements and permits null
+It is backed by a HashMap
+It doesn’t maintain insertion order
+It is not thread-safe
+* HashSet uses HashMap internally to store it’s objects. Whenever you create a HashSet object, one HashMap object associated with it is also created. 
+This HashMap object is used to store the elements you enter in the HashSet. The elements you add into HashSet are stored as keys of this HashMap object. 
+The value associated with those keys will be a constant.
+How HashSet Works Internally In Java?
+Whenever you insert an element into HashSet using add() method, it actually creates an entry in the internally backing HashMap object with element you have 
+specified as it’s key 
+and constant called “PRESENT” as it’s value. This “PRESENT” is defined in the HashSet class as below.
+
+// Dummy value to associate with an Object in the backing Map
+private static final Object PRESENT = new Object();
+ add() method of HashSet class.
+ public boolean add(E e)
+{
+        return map.put(e, PRESENT)==null;
+}
+You can notice that, add() method of HashSet class internally calls put() method of backing HashMap object by passing the element you have specified as a key and 
+ constant “PRESENT” as it’s value.
+ 
+   public boolean remove(Object o) {
+        return map.remove(o)==PRESENT;
+    }
+Set:  implclasses like HashSet, LinkedHashSet, TreeSet
+
+What is ENUM in java?
+* The Enum in Java is a data type which contains a fixed set of constants.
+* It can be used for days of the week (SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, and SATURDAY)
+* Java enum constants are static and final implicitly
+* Enums are used to create our own data type like classes.
+* Enum may implement many interfaces but cannot extend any class because it internally extends Enum class
+* Enum can be traversed
+* Enum improves type safety
+* Enum can have fields, constructors and methods
+
+lass EnumExample1{  
+//defining the enum inside the class  
+public enum Season { WINTER, SPRING, SUMMER, FALL }  
+//main method  
+public static void main(String[] args) {  
+   //traversing the enum  
+     for (Season s : Season.values())  
+          System.out.println(s);  
+          }
+}
+class EnumExample1{  
+//defining enum within class  
+public enum Season { WINTER, SPRING, SUMMER, FALL }  
+       //creating the main method  
+     public static void main(String[] args) {  
+          //printing all enum  
+      for (Season s : Season.values()){  
+                  System.out.println(s);  
+          }  
+     System.out.println("Value of WINTER is: "+Season.valueOf("WINTER"));  
+     System.out.println("Index of WINTER is: "+Season.valueOf("WINTER").ordinal());  
+     System.out.println("Index of SUMMER is: "+Season.valueOf("SUMMER").ordinal());   
+}}   
+
+Autoboxing and Unboxing:
+The automatic conversion of primitive data types into its equivalent Wrapper type is known as boxing and opposite operation is known as unboxing.
+class BoxingExample1{  
+  public static void main(String args[]){  
+    int a=50;  
+        Integer a2=new Integer(a);//Boxing  
+  
+        Integer a3=5;//Boxing  
+          
+        System.out.println(a2+" "+a3);  
+ }   
+}  
+
+The automatic conversion of wrapper class type into corresponding primitive type, is known as Unboxing. Let's see the example of unboxing:
+class UnboxingExample1{  
+  public static void main(String args[]){  
+    Integer i=new Integer(50);  
+        int a=i;         
+        System.out.println(a); 
+    }   
+}  
+
+
+Why java class name and filename should be same? 
+
+* While writing a java program first it is saved as a ".java" file, when it is compiled it forms byte code which is a ".class" file as such that if we made
+   our program file similar to the class it will be comfortable for us to understand without any ambiguity. We are allowed to use any name for a filename only 
+   when class is not public. In the case of a public class, we can’t use a different file name.
+* The filename must have the same name as the public class name in that file, which is the way to tell the JVM that this is an entry point.
+
+
+what is ConcurrentHashMap in java?
+
+The ConcurrentHashMap class is introduced in JDK 1.5 belongs to java.util.concurrent package, which implements ConcurrentMap as well as to Serializable interface also.
+ConcurrentHashMap is an enhancement of HashMap as we know that while dealing with Threads in our application HashMap is not a good choice because performance-wise 
+HashMap is not up to the mark.
+ConcurrentHashMap class is thread-safe i.e. multiple threads can operate on a single object without any complications.
+Inserting null objects is not possible in ConcurrentHashMap as a key or value.
+ConcurrentHashMap(): Creates a new, empty map with a default initial capacity (16), load factor (0.75) and concurrencyLevel (16).
+
+Following are the notable differences between HashMap and ConcurrentHashMap classes in Java.
+                  HashMap                                                                  ConcurrentHashMap
+Synchronized	HashMap is not synchronized.	                                 ConcurrentHashMap is synchronized.
+Thread Safe	HashMap is not thread safe.	                                 ConcurrentHashMap is thread safe
+Iterator type	HashMap iterator is fail-fast and .	                         ConcurrentHashMap is fail-safe and it will never throw ConcurrentModificationException during iteration.
+                ArrayList throws ConcurrentModificationException if concurrent 
+                 modification happens during iteration
+Null values	HashMap allows key and value to be null.	                    ConcurrentHashMap does not allow null key/value. It will throw NullPointerException.
+Performance	HashMap is faster.	                                            ConcurrentHashMap is slower than HashMap.
+Since Java
+Version	               1.2	                                                              1.5
+
+
+package com.sawan;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+//creating FailSafeIterator.java class   
+public class FailSafeIterator {
+	public static void main(String[] args) {
+		//creating map  
+        Map<Integer, String> students = new HashMap<Integer, String>();   
+        students.put(101, "Emma");   
+        students.put(102, "Paul");   
+        students.put(103, "Walker");  
+          
+        //creating ConcurrentHashMap by copy students map   
+        ConcurrentHashMap<Integer, String> copyStudents = new ConcurrentHashMap<Integer, String>(students);   
+          
+        //creating an instance of the Iterator class  
+        Iterator itr = copyStudents.keySet().iterator();   
+          
+        //iterating map using Iterator   
+        while (itr.hasNext()) {  
+            //printing elements of copyStudents  
+            System.out.println(copyStudents.get(itr.next()));   
+            // adding an element to copyStudents   
+            copyStudents.put(104, "Rubby"); // on the next call of next() method, exception will not be thrown.  
+        }   
+   }
+}
+
+// Java program to demonstrate removing
+// elements from ConcurrentHashMap
+ 
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+ 
+public class RemoveElementsFromConcurrentHashMap {
+ 
+    public static void main(String[] args)
+    {
+        // Creating ConcurrentHashMap
+        Map<String, String> my_cmmap
+            = new ConcurrentHashMap<String, String>();
+ 
+        // Adding elements to the map
+        // using put() method
+        my_cmmap.put("1", "1");
+        my_cmmap.put("2", "1");
+        my_cmmap.put("3", "1");
+        my_cmmap.put("4", "1");
+        my_cmmap.put("5", "1");
+        my_cmmap.put("6", "1");
+ 
+        // Printing the map
+        System.out.println("Map: " + my_cmmap);
+        System.out.println();
+ 
+        // Removing the mapping
+        // with existing key 6
+        // using remove() method
+        String valueRemoved = my_cmmap.remove("6");
+ 
+        // Printing the map after remove()
+        System.out.println("After removing mapping with key 6:");
+        System.out.println("Map: " + my_cmmap);
+        System.out.println("Value removed: "  + valueRemoved);
+        System.out.println();
+ 
+        // Removing the mapping
+        // with non-existing key 10
+        // using remove() method
+        valueRemoved = my_cmmap.remove("10");
+ 
+        // Printing the map after remove()
+        System.out.println("After removing mapping with key 10:");
+        System.out.println("Map: " + my_cmmap);
+        System.out.println("Value removed: " + valueRemoved);
+        System.out.println();
+ 
+        // Now clear the map using clear()
+        my_cmmap.clear();
+ 
+        // Print the clea Map
+        System.out.println("Map after use of clear(): "
+                           + my_cmmap);
+    }
+}
+
+Why use overriding hashcode() and equals()?
+We know that two objects are considered equal only if their references point to the same object, and unless we override equals and hashCode methods, the class 
+object will not behave properly on hash-based collections like HashMap, HashSet, and Hashtable. This is because hash-based collections are organized like 
+a sequence of buckets, and the hash code value of an object is used to determine the bucket where the object would be stored, and the same hash code is used again 
+to find the object’s position in the bucket
+
+Use an object as a key in HashMap or HashSet in Java?
+ First, let’s take an example to demonstrate the default behavior on using an object as a key in hash-based collections like HashMap, HashSet, 
+ and Hashtable in Java.
+As evident from the generated output, the HashSet contains both e1 and e2 objects even though e1 and e2 have the same value of instance variables. 
+This is because two objects are considered equal only if their references point to the same object, which is not the case here.
+ 
+Solution:
+The hash-based collections are organized like a sequence of buckets, where the hash code value of an object is used to determine the bucket where 
+the object would be stored, and the object is linearly searched in the bucket using the equals method. Therefore, 
+to use an object as a key in HashMap, HashSet, or Hashtable in Java, we need to override equals and hashcode methods of that object since default
+ implementation of these methods simply check for the instance equality.
+
+Different between map and flatmap using Stream?
+
+-------- Without flatMap() -------------------------------
+     collect() returns: [[Laptop, Phone], [Mouse, Keyboard]]
+
+-------- With flatMap() ----------------------------------
+     collect() returns: [Laptop, Phone, Mouse, Keyboard]
+
+map is for A -> B mapping
+Stream.of("dog", "cat")              // stream of 2 Strings
+    .map(s -> s.length())            // stream of 2 Integers: [3, 3]
+
+flatMap is for A -> Stream< B> concatinating
+Stream.of("dog", "cat")             // stream of 2 Strings
+    .flatMapToInt(s -> s.chars())   // stream of 6 ints:      [d, o, g, c, a, t]
+
+# The main difference between the map and flatMap is the return type
+# Both produce Stream<R>.
+# The map produces one output value for each input value where flatMap provides one or more values for each input value
+# To put it in simple words, a map is for transformation while flatMap is a combination of transformation and flattering.
+# map() is used only for transformation. where as flatMap() is used both for transformation and mapping.
+# map() Produce a stream of value. where as flatmap() Produce a stream of stream value.
+
+/ Java program using map() function
+import java.io.*;
+import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+class GFG {
+    
+    public static void main(String[] args)
+    {
+        // making the array list object
+        ArrayList<String> fruit = new ArrayList<>();
+        fruit.add("Apple");
+        fruit.add("mango");
+        fruit.add("pineapple");
+        fruit.add("kiwi");
+        System.out.println("List of fruit-" + fruit);
+        
+        // lets use map() to convert list of fruit
+        List list = fruit.stream()
+                        .map(s -> s.length())
+                        .collect(Collectors.toList());
+        System.out.println("List generated by map-" + list);
+    }
+}
+output
+List of fruit-[Apple, mango, pineapple, kiwi]
+List generated by map-[5, 5, 9, 4]
+
+// Java program using flatMap() function
+import java.io.*;
+import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+class GFG {
+    public static void main(String[] args)
+    {
+        // making the arraylist object of List of Integer
+        List<List<Integer> > number = new ArrayList<>();
+        
+        // adding the elements to number arraylist
+        number.add(Arrays.asList(1, 2));
+        number.add(Arrays.asList(3, 4));
+        number.add(Arrays.asList(5, 6));
+        number.add(Arrays.asList(7, 8));
+        
+        System.out.println("List of list-" + number);
+        
+        // using flatmap() to flatten this list
+        List<Integer> flatList
+            = number.stream()
+                  .flatMap(list -> list.stream())
+                  .collect(Collectors.toList());
+        
+        // printing the list
+        System.out.println("List generate by flatMap-"
+                           + flatList);
+    }
+}
+Output
+List of list-[[1, 2], [3, 4], [5, 6], [7, 8]]
+List generate by flatMap-[1, 2, 3, 4, 5, 6, 7, 8]
+
+
+Reflection API?
+# Java Reflection is a process of examining or modifying the run time behavior of a class at run time.
+# The Reflection API is mainly used in:
+# IDE (Integrated Development Environment) e.g., Eclipse, MyEclipse, NetBeans etc.
+# Debugger  & Test Tools etc.
+Commonly used methods of Class class:
+1) public String getName()	returns the class name
+2) public static Class forName(String className)throws ClassNotFoundException	loads the class and returns the reference of Class class.
+3) public Object newInstance()throws InstantiationException,IllegalAccessException	creates new instance.
+etc
+class Simple{}    
+    
+public class Test{    
+ public static void main(String args[]) throws Exception {    
+  Class c=Class.forName("Simple");    
+  System.out.println(c.getName());    
+ }    
+}  
+
+# Reflection is an API which is used to examine or modify the behavior of methods, classes, interfaces at runtime.
+# The required classes for reflection are provided under java.lang.reflect package.
+# Reflection gives us information about the class to which an object belongs and also the methods of that class which can be executed by using the object.
+3 Through reflection we can invoke methods at runtime irrespective of the access specifier used with them
+
+
+Join and wait and sleep() in multithreading?
+                   wait()                                                               sleep()
+1.	The Wait() method is related to the Object class.	                     The Sleep () method is related to the Thread class.
+2.         It is not a static method.	                                             It is a static method.
+3.       At the time of the Synchronization, the Wait() method releases obj.	     At the time of the Synchronization, the Sleep() method doesn't release the obj,
+4.	We can call the Wait () method only from the Synchronized context.	We can call the Sleep () method from outside the Synchronized context.   
+# sleep() is a method which is used to pause the process for few seconds or the time we want to. But in case of wait() method, thread goes in waiting state 
+  and it won’t come back automatically until we call the notify() or notifyAll().      
+#  The major difference is that wait() releases the lock or monitor while sleep() doesn’t releases the lock or monitor while waiting. wait() is used for inter-thread
+    communication while sleep() is used to introduce pause on execution, generally.          
+#   Sleep(): This Method is used to pause the execution of current thread for a specified time in Milliseconds. Here, Thread does not lose its ownership of the monitor and resume’s it’s execution
+
+# Wait(): This method is defined in object class. It tells the calling thread (a.k.a Current Thread) to wait until another thread invoke’s the notify() 
+or notifyAll() method for this object, The thread waits until it reobtains the ownership of the monitor and Resume’s Execution.     
+
+// Java program to demonstrate the difference
+// between wait and sleep
+ 
+class GfG{
+   
+private static Object LOCK = new Object();
+ 
+public static void main(String[] args)
+  throws InterruptedException {
+  
+    Thread.sleep(1000);
+   
+    System.out.println("Thread '" + Thread.currentThread().getName() +
+      "' is woken after sleeping for 1 second");
+  
+    synchronized (LOCK)
+    {
+        LOCK.wait(1000);
+       
+        System.out.println("Object '" + LOCK + "' is woken after" +
+          " waiting for 1 second");
+    }
+}
+}
+Output
+Thread 'main' is woken after sleeping for 1 second
+Object 'java.lang.Object@1d81eb93' is woken after waiting for 1                                                            
+
+Join() of Thread class?
+The join() method in Java is provided by the java.lang.Thread class that permits one thread to wait until the other thread to finish its execution. 
+Suppose th be the object the class Thread whose thread is doing its execution currently, then the th.join(); statement ensures that th is finished before the 
+program does the execution of the next statement.
+
+class TestJoinMethod1 extends Thread{    
+ public void run(){    
+  for(int i=1;i<=5;i++){    
+   try{    
+    Thread.sleep(500);    
+   }catch(Exception e){System.out.println(e);}    
+  System.out.println(i);    
+  }    
+ }    
+public static void main(String args[]){    
+ TestJoinMethod1 t1=new TestJoinMethod1();    
+ TestJoinMethod1 t2=new TestJoinMethod1();    
+ TestJoinMethod1 t3=new TestJoinMethod1();    
+ t1.start();    
+ try{    
+  t1.join();    
+ }catch(Exception e){System.out.println(e);}    
+    
+ t2.start();    
+ t3.start();    
+ }    
+}    
+
+Type of Memory in java?
+The memory in the JVM is divided into five different parts namely− 
+1. Method area− The method area stores the class code − code of the variables and methods.
+2. Heap − The Java objects are created in this area. 
+3. Java Stack(Stack memory)− While running methods the results are stored in the stack memory. 
+4. PC registers− These contain the address of the instructions of the methods.
+5. Native method stacks− Similar to Java stack, native methods are executed on the Native method stacks.
+
+LinkedHashmap?
+Java LinkedHashMap contains values based on the key.
+Java LinkedHashMap contains unique elements.
+Java LinkedHashMap may have one null key and multiple null values.
+Java LinkedHashMap is non synchronized.
+Java LinkedHashMap maintains insertion order.
+The initial default capacity of Java HashMap class is 16 with a load factor of 0.75.
+import java.util.*;  
+class LinkedHashMap1{  
+ public static void main(String args[]){  
+   
+  LinkedHashMap<Integer,String> hm=new LinkedHashMap<Integer,String>();  
+  
+  hm.put(100,"Amit");  
+  hm.put(101,"Vijay");  
+  hm.put(102,"Rahul");  
+  
+for(Map.Entry m:hm.entrySet()){  
+   System.out.println(m.getKey()+" "+m.getValue());  
+  }  
+ }  
+}  
+Output:100 Amit
+       101 Vijay
+       102 Rahu
+
+
+
+ERRor and Exception difference?
+Sr. No.	Key	Error	                         Exception
+1Type 
+Classified as an unchecked type              Classified as checked and unchecked 
+2Package
+ It belongs to java.lang.error        It belongs to java.lang.Exception 
+3Recoverable/ Irrecoverable 
+   it is Irrecoverable                                      It is recoverable
+4 It can't be occur at compile time         It can occur at run time compile time both 
+5 Example OutOfMemoryError ,IOError       NullPointerException , SqlException 
+
+
+Example of Error
+public class ErrorExample {
+   public static void main(String[] args){
+      recursiveMethod(10)
+   }
+   public static void recursiveMethod(int i){
+      while(i!=0){
+         i=i+1;
+         recursiveMethod(i);
+      }
+   }
+}
+Output
+Exception in thread "main" java.lang.StackOverflowError
+   at ErrorExample.ErrorExample(Main.java:42)
+
+Example of Exception
+public class ExceptionExample {
+   public static void main(String[] args){
+      int x = 100;
+      int y = 0;
+      int z = x / y;
+   }
+}
+Output
+java.lang.ArithmeticException: / by zero
+   at ExceptionExample.main(ExceptionExample.java:7)
+
+
+Different abstract class and interface:
+Abstract class and interface both are used to achieve abstraction where we can declare the abstract methods. Abstract class and interface both can't be instantiated.
+But there are many differences between abstract class and interface that are given below.
+Abstract class
+1.1) Abstract class can have abstract and non-abstract methods.
+2) Abstract class doesn't support multiple inheritance.
+4) Abstract class can provide the implementation of interface.
+5) The abstract keyword is used to declare abstract class.
+6) An abstract class can extend another Java class and implement multiple Java interfaces.
+7) An abstract class can be extended using keyword "extends"
+8) A Java abstract class can have class members like private, protected, etc
+9)Example:
+public abstract class Shape{
+public abstract void draw();
+}
+interface
+1. 1Interface can have only abstract methods. Since Java 8, it can have default and static methods also.
+2. Interface supports multiple inheritance.
+3. Interface has only static and final variables.
+4.Interface can't provide the implementation of abstract class.
+5. The interface keyword is used to declare interface.
+6. An interface can extend another Java interface only.
+7. An interface can be implemented using keyword "implements".
+8. Members of a Java interface are public by default.
+
+# An interface in Java is a blueprint of a class. It has static constants and abstract methods.
+
+Methodoverriding two method return type same or diff?
+same
+
+Arraylist internal structure?
+The size of ArrayList grows automatically which is fully based on load factor and current capacity. Basically, the load factor is the measure that 
+decides when to increase the capacity of the ArrayList. The default load factor of an ArrayList is 0.75f.
+ArrayList increases the capacity after each threshold. Now the question arises how the threshold is calculated?
+Threshold = (Current Capacity) * (Load Factor)
+For example, if the ArrayList has 10 element and load factor of 0.75f, then threshold will be,
+Threshold = 10 * 0.75 = 7
+
+Note that till Java 6 the new capacity calculation used to be like this-
+int newCapacity = (oldCapacity * 3)/2 + 1;
+default size=10
+nw size=10*3/2+1=16
+
+Which is changed in Java 7 to use right shift operator. With right shift operator also it will grow by 50% of old capacity.
+Let's see it with the help of a small program
+public class Test {
+    public static void main(String args[])  {
+       int a = 10;
+       System.out.println(a>>1);   
+    }    
+}
+Output:5
+
+4) By what size ArrayList is resized in java? How much size increases when ArrayList is resized in java?
+ArrayList is resized by 50% of it’s current size. 
+So, ArrayList will be resized from 10, to 15, to 22, to 33 and so on.
+
+java7 onward If the default capacity was 10 then 
+int newCapacity = oldCapacity + (oldCapacity >> 1);
+will return 15.
+
+internal working of linkedlist?
+
+
+
+polymporphism?
+Multiple inheritance using two interface same method ?is correct code
+Constructor and distructor?
+
+
+Vector?
+Vector implements a dynamic array. It is similar to ArrayList, but with two differences −
+Vector is synchronized.
+Vector contains many legacy methods that are not part of the collections framework.
+The Iterators returned by the Vector class are fail-fast. In case of concurrent modification, it fails and throws the ConcurrentModificationException.
+vector() :- It constructs an empty vector with the default size as 10.
+putting 11th value size will be double like 20
+add(),addElement(),iterator(),listIterator(),removeElement()
+import java.util.*;  
+public class VectorExample {  
+       public static void main(String args[]) {  
+          //Create a vector  
+          Vector<String> vec = new Vector<String>();  
+          //Adding elements using add() method of List  
+          vec.add("Tiger");  
+          vec.add("Lion");  
+          vec.add("Dog");  
+          vec.add("Elephant");  
+          //Adding elements using addElement() method of Vector  
+          vec.addElement("Rat");  
+          vec.addElement("Cat");  
+          vec.addElement("Deer");  
+            
+          System.out.println("Elements are: "+vec);  
+       }  
+
+Serialization and deseraizable  in java?
+=>Def. of Serialization:
+-----------------------------------------------
+=>The process of saving the entire object data into the file of
+secondary memory by performing single write operation is called
+Serialization. 
+=>Hence Serialization concept participates in Write Operation.
+b) Choose the file name and open it into write mode.
+Example:       FileOutputStream fos=new FileOutputStream("stud.data");
+
+###  Serialization in Java is a mechanism of writing the state of an object into a byte-stream. It is mainly used in Hibernate, RMI, JPA, EJB and JMS technologies.
+Advantages of Java Serialization
+It is mainly used to travel object's state on the network (that is known as marshalling).
+
+c) Create an object of ObjectOutputStream ( bcoz an object of FileOutputStream can't write the entire object data)
+		
+				java.io.ObjectOutputStream
+				-----------------------------------------
+					i) ObjectOutputStream(FileOutputStream)
+					ii) public void   writeObject(Object)
+				//here Object  represents any serializable sub class object
+  Example:-    
+			ObjectOutputStream oos=new ObjectOutputStream(fos);
+
+d) Save / write / transfer  the serializable sub class object data into the file of secondary memory.
+			Example:   oos.writeObject(s1);
+			sop("Student object data saved successfully in File");
+=>In Java programming, we have two types of serializations. They are
+a) Complete Serialization
+b) Selective Serialization
+
+a) Complete Serialization:
+-----------------------------------------
+=>In Complete Serialization process, all the data members of
+Serializable sub class participates in serialization process.
+Example: student.jav
+
+Def. of De-serialization:
+-----------------------------------
+=>The process of reading the entire record from the file of secondary
+memory into the object of main memory by peforming single read
+operation is called De-serialization.
+
+### The reverse operation of serialization is called deserialization where byte-stream is converted into an object.
+
+3) Development of De-Serialization Process:
+------------------------------------------------------------------------------------------------------------------------
+a) Choose the file name and open it into read mode with the help of FileInputStream
+
+Example:       FileInputStream fis=new FileInputStream("stud.data");
+
+b)Create an object of ObjectInputStream (bcoz an object of FileInputStream is unable to read entire recored from the file)
+			java.io.ObjectInputStream
+			----------------------------------------
+			i) ObjectInputStream(FileInputStream)
+			ii)  public   Object     readObject()		
+Example:-    ObjectInputStream ois=new ObjectInputStream(fis);
+c) read the entire record from the file of secondary memory.
+		Object obj=ois.readObject();
+		sop(obj);  // sp.Student@HexaDecimal fmt
+		//obj.dispStudInfo()----->error			
+d) Type cast an object java.lang.Object into Serializable sub class object
+	Example:    sp.Student so=(sp.Student)obj;
+e) display the de-serialized data 
+		Example:   so.dispStudInfo(); //valid
+========================X===================================
+ Here are the few unchecked exception classes:
+47java App is not connected to outer resource is called unchecked exception[Not checked by compiler]
+Exceptional handling is optional,It is run time exception
+      NullPointerException
+      ArrayIndexOutOfBoundsException
+     ArithmeticException
+     IllegalArgumentException
+     NumberFormatException
+
+
+Note that all checked exceptions are subclasses of Exception class. For example,
+java App is  connected to outer resource called checked exception [checked by compiler]
+Exceptional handling is mandatory
+ClassNotFoundException
+IOException
+SQLException
+FileNotFoundExcepion
+
+Yield method in multithreading:?
+
+A yield() method is a static method of Thread class and it can stop the currently executing thread and will give a chance to other waiting threads of the 
+same priority. If in case there are no waiting threads or if all the waiting threads have low priority then the same thread will continue its execution.
+ The advantage of yield() method is to get a chance to execute other waiting threads so if our current thread takes more time to execute and allocate processor 
+to other threads.
+Syntax: public static void yield()  
+
+public class JavaYieldExp extends Thread
+{
+    public void run()
+    {
+        for (int i=0; i<3 ; i++)
+            System.out.println(Thread.currentThread().getName() + " in control");
+    }
+    public static void main(String[]args)
+    {
+        JavaYieldExp t1 = new JavaYieldExp();
+        JavaYieldExp t2 = new JavaYieldExp();
+        // this will call run() method
+        t1.start();
+        t2.start();
+        for (int i=0; i<3; i++)
+        {
+            // Control passes to child thread
+            t1.yield();
+            System.out.println(Thread.currentThread().getName() + " in control");
+        }
+    }
+}
+how to handle exception in spring boot
+rehashing
+Autoc
+
+
+// Java Program to sort an elements
+// by bringing Arrays into play
+ 
+// Main class
+class GFG {
+ 
+    // Main driver method
+    public static void main(String[] args)
+    {
+ 
+        // Custom input array
+        int arr[] = { 4, 3, 2, 1 };
+ 
+        // Outer loop
+        for (int i = 0; i < arr.length; i++) {
+ 
+            // Inner nested loop pointing 1 index ahead
+            for (int j = i + 1; j < arr.length; j++) {
+ 
+                // Checking elements
+                int temp = 0;
+                if (arr[j] < arr[i]) {
+ 
+                    // Swapping
+                    temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+ 
+            // Printing sorted array elements
+            System.out.print(arr[i] + " ");
+        }
+    }
+}
+
+import java.util.Arrays;
+ 
+// Main class
+public class GFG {
+ 
+    // Main driver method
+    public static void main(String[] args)
+    {
+        // Custom input array
+        int[] arr = { 13, 7, 6, 45, 21, 9, 101, 102 };
+ 
+        // Calling the sort() method present
+        // inside Arrays class
+        Arrays.sort(arr);
+ 
+        // Printing and display sorted array
+        System.out.printf("Modified arr[] : %s",
+                          Arrays.toString(arr));
+    }
+}
+
+import java.util.Arrays;
+import java.util.Collections;
+ 
+public class GFG {
+    public static void main(String[] args)
+    {
+        // Note that we have Integer here instead of
+        // int[] as Collections.reverseOrder doesn't
+        // work for primitive types.
+        Integer[] arr = { 13, 7, 6, 45, 21, 9, 2, 100 };
+ 
+        // Sorts arr[] in descending order
+        Arrays.sort(arr, Collections.reverseOrder());
+ 
+        System.out.printf("Modified arr[] : %s",
+                          Arrays.toString(arr));
+    }
+}
+
+Stream api reduce (Intermediate operation)
+
+Stream api reduce (Intermediate operation)
+
+Sum, min, max, average, and string concatenation are all specialcases of reduction. Summing a stream of numbers can be expressed as: 
+     Integer sum = integers.reduce(0, (a, b) -> a+b);
+
+numbers.stream().reduce(Integer::sum);
+ 
+Syntax :
+
+T reduce(T identity, BinaryOperator<T> accumulator);
+
+Where, identity is initial value 
+of type T and accumulator is a 
+function for combining two values.
+sum(), min(), max(), count() etc. are some examples of reduce operations.
+In Java, reducing is a terminal operation that aggregates a stream into a type or a primitive type. 
+Java 8 provides Stream API contains set of predefined reduction operations such as average(), sum(), min(),
+ max(), and count(). These operations return a value by combining the elements of a stream. In Java, reduce()
+ is a method of the Stream interface. In this section, we will discuss the Java Stream.reduce() method in detail.
+ 
+  1. reduce(BinaryOperator<T> accumulator)
+ 2. reduce(Tidentity, BinaryOperator<T> accumulator)
+numbers.stream().reduce(Integer::sum);
+
+
+How to maintain immutability with mutable object reference?
+
+1. make your class final,so that no other classes can extend it.
+2. make all instance variables private & final,so that they are initialized only once inside the constructor and never modified afterward.
+3. provide only getter methods don't provide setter methods.
+4. if the class holds a muable object:
+   .Make sure to always return a clone copy of the field and never reurn the real object instance.
+
+package com.sawan;
+
+import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+public final class Employee {
+	private final Integer id;
+	private final String name;
+	private final String email;
+	private final Date dob;
+	private final Set<String> skills;
+	private final Address address;
+
+	public Employee(Integer id,String name,String email,Date dob,Set<String> skills,Address address)
+	{
+		// super();
+		this.id=id;
+		this.name=name;
+		this.email=email;
+		this.dob=dob;
+		this.skills=skills;
+		this.address=address;
+	}	
+	public Integer getId() {
+		return id;
+	}
+	public String getName() {
+		return name;
+	}
+	public String getEmail() {
+		return email;
+	}	
+	public Date getDob() {
+		return new Date(dob.getTime());
+	}
+	public Set<String> getSkills() {
+		return new LinkedHashSet<>(skills);
+	}	
+	public Address getAddress() {
+		Address empAddress=new Address();
+		empAddress.setStreet(address.getStreet());
+		empAddress.setZipCode(address.getZipCode());
+		empAddress.setAddressLine1(address.getAddressLine1());
+		empAddress.setAddressLine2(address.getAddressLine2());
+
+		return empAddress;
+		//return address;
+	}
+	
+}
+1. example:
+public class Address {
+
+	 private String street;
+	 private Long zipCode;
+	 private String addressLine1;
+	 private String addressLine2;
+	/**
+	 * @return the street
+	 */
+	public String getStreet() {
+		return street;
+	}	
+	public void setStreet(String street) {
+		this.street = street;
+	}
+	
+	public Long getZipCode() {
+		return zipCode;
+	}	
+	public void setZipCode(Long zipCode) {
+		this.zipCode = zipCode;
+	}
+	
+	public String getAddressLine1() {
+		return addressLine1;
+	}
+	
+	public void setAddressLine1(String addressLine1) {
+		this.addressLine1 = addressLine1;
+	}
+	
+	public String getAddressLine2() {
+		return addressLine2;
+	}
+	
+	public void setAddressLine2(String addressLine2) {
+		this.addressLine2 = addressLine2;
+	}
+}
+
+
+package com.sawan;
+
+import java.text.ParseException;
+import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+import com.sawan.util.MyUtil;
+
+public class CustomFinalClass {
+
+	public static void main(String[] args) throws ParseException{
+	
+		Address address=new Address();
+		address.setStreet("kesariya");
+		address.setZipCode(8779L);
+		address.setAddressLine1("Address line 1");
+		address.setAddressLine2("Address line 2");
+		
+		Set<String> skills=new LinkedHashSet<>();
+		skills.add("Sring");
+		skills.add("Hibernate");
+		
+		Date dob=MyUtil.stringToDate("04/01/1980");
+		Employee employee=new Employee(9088,"Sean Murphy","sawan@gmail.com",dob,skills,address);
+		
+		System.out.println("ID: "+employee.getId());
+		System.out.println("Name: "+employee.getName());
+		System.out.println("Email: "+employee.getEmail());
+		System.out.println("DOB: "+employee.getDob());
+		System.out.println("skills: "+employee.getSkills());
+		System.out.println("Employee Address:::::::");
+		System.out.println("Street: "+address.getStreet());
+		System.out.println("zipcode: "+address.getZipCode());
+		System.out.println("addressline1 "+address.getAddressLine1());
+		System.out.println("addressline2: "+address.getAddressLine2());
+		//Let's try to change state of this employee object
+		System.out.println("---------------------------------------");
+		//try to modify Employee Address Street values
+		employee.getAddress().setStreet("patna");
+		employee.getDob().setTime(new Date().getTime());
+		employee.getSkills().add("Spring boot");
+		System.out.println("-----------------------------------/n");
+		System.out.println("ID: "+employee.getId());
+		System.out.println("Name: "+employee.getName());
+		System.out.println("Email: "+employee.getEmail());
+		System.out.println("DOB: "+employee.getDob());
+		System.out.println("skills: "+employee.getSkills());
+		System.out.println("Employee Address:::::::");
+		System.out.println("Street: "+address.getStreet());
+		System.out.println("zipcode: "+address.getZipCode());
+		System.out.println("addressline1 "+address.getAddressLine1());
+		System.out.println("addressline2: "+address.getAddressLine2());
+	}
+
+}
+3.
+
+
+4.
+package com.sawan.util;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class MyUtil {
+
+	public static Date stringToDate(String d) throws ParseException
+	{
+		DateFormat dateFormat=new SimpleDateFormat("dd/MM/yyyy");
+		Date date=dateFormat.parse(d);
+		return date;
+		
+	}
+}
+
+
+second way:=rules to create immutable class in java
+1). Don't allow other classes to override the methods
+2)Don't allow to create subclass
+3)All fields should be private & final
+4) Use parameterized constructor to initialize fields
+5) Don't allow direct access o mutable instance variables
+6) Don't provide methods to update fields(like method)
+package com.sawan;
+
+public final class CustomImmutableClass {
+
+	//3.all fields should be private & final
+	private final String schoolName;
+	private final Integer studentStrength;
+	private final Student student;	
+	
+	public CustomImmutableClass(String schoolName, Integer studentStrength, Student student) throws 
+	CloneNotSupportedException{
+		super();
+		this.schoolName = schoolName;
+		this.studentStrength = studentStrength;
+		//Don't allow direct access to Mutable Instance variables
+		this.student = (Student)student.clone();
+	}
+	/**
+	 * @return the schoolName
+	 */
+	public String getSchoolName() {
+		return schoolName;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "CustomImmutableClass [schoolName=" + schoolName + ", studentStrength=" + studentStrength + ", student="
+				+ student + "]";
+	}
+	/**
+	 * @return the studentStrength 
+	 */
+	public Integer getStudentStrength() {
+		return studentStrength;
+	}
+	/**
+	 * @return the student
+	 */
+	public Student getStudent() {
+		return student;
+	}
+	
+	
+}
+package com.sawan;
+
+public class Student implements Cloneable{
+
+	private String studentName;
+	private int studentRollNo;
+	
+	
+	
+	@Override
+	protected Object clone() throws CloneNotSupportedException
+	{
+		return super.clone();
+	}
+	
+	@Override
+	public String toString() {
+		return "Student [studentName=" + studentName + ", studentRollNo=" + studentRollNo + "]";
+	}
+	/**
+	 * @return the studentName
+	 */
+	public String getStudentName() {
+		return studentName;
+	}
+	/**
+	 * @param studentName the studentName to set
+	 */
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
+	}
+	/**
+	 * @return the studentRollNo
+	 */
+	public int getStudentRollNo() {
+		return studentRollNo;
+	}
+	/**
+	 * @param studentRollNo the studentRollNo to set
+	 */
+	public void setStudentRollNo(int studentRollNo) {
+		this.studentRollNo = studentRollNo;
+	}
+	public Student(String studentName, int studentRollNo) {
+		super();
+		this.studentName = studentName;
+		this.studentRollNo = studentRollNo;
+	}
+	
+	
+	
+}
+public class CustomFinalSecond {
+
+	public static void main(String[] arg) throws CloneNotSupportedException {
+		//student object creaation
+		Student studentObj=new Student("Sawan",100);
+		CustomImmutableClass immutableObj=new CustomImmutableClass("bankat",900,studentObj);
+		//printing immutable object value
+		System.out.println("Immutable object :\n"+immutableObj);
+		//modifying mutable instance variable
+		studentObj.setStudentName("PushpaSawan");
+		
+		//printing immutable object values after modification.
+		System.out.println("Immuable object after modificaion\n"+immutableObj);
+}
+
+Method Hidding:
+Method hiding can be defined as, "if a subclass defines a static method with the same signature as a static method in the super class, 
+in such a case, the method in the subclass hides the one in the superclass." The mechanism is known as method hiding. It happens because
+ static methods are resolved at compile time.
+
+
+Example of Method Hiding in Java
+Sample.java
+
+//parent class  
+class Demo  
+{  
+      public static void method1()  
+     {  
+        System.out.println("Method-1 of the Demo class is executed.");  
+    }  
+    public void method2()  
+    {  
+       System.out.println("Method-2 of the Demo class is executed.");  
+    }  
+ }  
+//child class  
+public class Sample extends Demo  
+{  
+     public static void method1()  
+    {  
+          System.out.println("Method-1 of the Sample class is executed.");  
+    }  
+     public void method2()  
+     {  
+          System.out.println("Method-2 of the Sample class is executed.");  
+      }  
+      public static void main(String args[])  
+     {  
+          Demo d1 = new Demo();  
+         //d2 is reference variable of class Demo that points to object of class Sample  
+          Demo d2 = new Sample();  
+          //method calling with reference (method hiding)   
+          d1.method1();  
+          d2.method1();  
+          //method calling with object (method overriding)  
+          d1.method2();  
+          d2.method2();  
+      }  
+}  
+Output:
+Method-1 of the Demo class is executed.
+Method-1 of the Demo class is executed.
+Method-2 of the Demo class is executed.
+Method-2 of the Sample class is executed.
+We observe that the method of the superclass is hidden by the subclass.
+Hiding a static method of a superclass looks like overriding an instance method of a superclass. 
+The main difference can be seen at runtime in the following scenario.
+
+When we override an instance method, we get the benefit of run-time polymorphism.
+When we override a static method, we do not get the benefit of run-time polymorphism.
+
+Absract class and  final class :
+:   final class can extends abstract clsss but final class needs to override all abstract method because abstract class has no child class.
+
+************* WHY abstract class can't be final & abstract cannot be static*******************
+class Parent
+{
+    final abstract void m1();
+    static abstract void m2();
+}
+class Child exends Parent
+{
+   //implementation
+}
+
+1.  final method  cann't overide
+2. static -- common access for all object reference
+3.  abstract is specific
+
+so common and specific will not be come together.
+
+
+
+Binary Tree:
+Binary Tree
+A tree in which each node (parent) has at most two-child nodes (left and right) is called binary tree. 
+The top most node is called the root node. In a binary tree a node contains the data and the pointer (address) of the left and right child node.
+
+The height of a binary tree is the number of edges between the tree's root and its furthest (deepest) leaf. 
+If the tree is empty, the height is 0. The height of the node is denoted by h.
+
+(1) Tree is made of of the nodes and edges
+(2) n nodes->n-1 edges
+(3) Degree->no of direct children (for a node)
+(4) Degree of a tree is the highest degree of a node among all the nodes present in the tree.
+(5) Binary tree=tree of degree 2,node can have 0,1,or 2 children
+ex:-  ham do hamare do
+
+
+
+
+
+Callable interface
+caching in rest
+SOLID 
+Binary tree
+LinkedList Internal work
+life cycle of multiple thread
+Grouping by in db
+
+
+Object has 11 method:
+(1) protected Object clone() -
+ Used to create and return a copy of this object.
+
+(2) boolean equals(Object obj) -
+ Used to indicate whether some other object is "equal to" this one.
+
+(3) protected void finalize() -
+ garbage collector calls this method on an object when it determines that there are no more references to the object.
+
+4 Class<?> getClass() - 
+Used to get the runtime class of this Object.
+
+
+5. int hashCode() -
+ Used to get a hash code value for the object.
+
+6 void notify() -
+ Used to wake up a single thread that is waiting on this object's monitor.
+
+7. void notifyAll() -
+ Used to wake up all threads that are waiting on this object's monitor.
+
+8. String toString() -
+ Used to get a string representation of the object.
+
+9.
+public final void wait(long timeout)throws InterruptedException
+:causes the current thread to wait for the specified milliseconds, until another thread notifies (invokes notify() or notifyAll() method).
+
+10.
+public final void wait(long timeout,int nanos)throws InterruptedException:
+causes the current thread to wait for the specified milliseconds and nanoseconds, until another thread notifies (invokes notify() or notifyAll() method).
+
+11.
+public final void wait()throws InterruptedException:
+: causes the current thread to wait, until another thread notifies (invokes notify() or notifyAll() method).
+
+other:
+9. void wait() -
+ marks the current thread to wait until another thread invokes the notify() method or the notifyAll() method for this object.
+
+9. void wait(long timeout) -
+ marks the current thread to wait until either another thread invokes the notify() method or the notifyAll() method 
+for this object, or a specified amount of time has elapsed.
+
+*   wait() -  Tells the current thread to release the lock and go to sleep until some other thread enters the same monitor and calls notify().
+* 
+notify() -  Wakes up the single thread that is waiting on this object's monitor.
+notifyAll() - It wakes up all the threads that called wait() on the same object.
+https://www.apowersoft.com/free-online-screen-recorder
+
+
+Final ArrayList:
+This means that you cannot rebind the variable to point to a different collection instance:
+
+final List<Integer> list = new ArrayList<Integer>();
+list = new ArrayList<Integer>();
+
+ // Since `list' is final, this won't compile
+As a matter of style, I declare most references that I don’t intend to change as final.
+
+I still can add to ArrayList new elements, remove elements and update it.
+final List<Integer> list = new ArrayList<Integer>();
+		//list = new ArrayList<Integer>();
+		list.add(90);
+	    list.add(78);
+        list.add(967);
+        //list.remove(1);
+
+        System.out.println("list= "+list);        
+        //it will not allowed
+       // list = new ArrayList<Integer>(); // Since `list' is final, this won't compile
+
+
+Final Array:
+So a final array means that the array variable which is actually a reference to an object, cannot be changed to refer to 
+anything else, but the members of array can be modified.
+
+As an exercise, predict the output of following program
+
+
+		final int arr[] = {1, 2, 3, 4, 5};  // Note: arr is final
+	       for (int i = 0; i < arr.length; i++)
+	       {
+	           arr[i] = arr[i]*10;  
+	           System.out.println(arr[i]);          
+	       }  
+class Test 
+{
+    public static void main(String args[])
+    {
+       final int arr1[] = {1, 2, 3, 4, 5};
+       int arr2[] = {10, 20, 30, 40, 50};
+       arr2 = arr1;      
+       arr1 = arr2;  ///compile time error
+       for (int i = 0; i < arr2.length; i++)
+          System.out.println(arr2[i]);          
+    }    
+
+
+
+/ Program 2
+class Test 
+{
+    int p = 20;
+    public static void main(String args[])
+    {
+       final Test t1 = new Test();       
+       Test t2 = new Test();
+       t1 = t2; 
+       System.out.println(t1.p);      
+    }    
+}
+
+Output: Compiler Error: cannot assign a value to final variable t1
+
+So a final array means that the array variable which is actually a reference to an object, cannot be changed to refer
+to anything else, but the members of array can be modified.
+
+
+
+SOLID Principles Java:
+The word SOLID acronym for:
+Single Responsibility Principle (SRP)
+Open-Closed Principle (OCP)
+Liskov Substitution Principle (LSP)
+Interface Segregation Principle (ISP)
+Dependency Inversion Principle (DIP)
+
+In Java, SOLID principles are an object-oriented approach that are applied to software structure design.
+These five principles have changed the world of object-oriented programming, and also changed the way of writing software.
+ It also ensures that the software is modular, easy to understand, debug, and refactor. In this section, we will discuss SOLID principles 
+in Java with proper example.
+
+Why should we use SOLID principles?
+It reduces the dependencies so that a block of code can be changed without affecting the other code blocks.
+The principles intended to make design easier, understandable.
+By using the principles, the system is maintainable, testable, scalable, and reusable.
+It avoids the bad design of the software.
+
+Single Responsibility Principle:
+** The single responsibility principle states that every Java class must perform a single functionality
+
+** Implementation of multiple functionalities in a single class mashup the code and if any modification is required may 
+affect the whole class. It precise the code and the code can be easily maintained. Let's understand the single responsibility 
+principle through an example.
+
+Suppose, Student is a class having three methods namely printDetails(), calculatePercentage(), and addStudent(). Hence, the Student 
+class has three responsibilities to print the details of students, calculate percentages, and database. By using the single responsibility principle, 
+we can separate these functionalities into three separate classes to fulfill the goal of the principle.
+
+
+Student.java
+
+public class Student  
+{  
+public void printDetails();  
+{  
+//functionality of the method  
+}  
+pubic void calculatePercentage();  
+{  
+//functionality of the method  
+}  
+public void addStudent();  
+{  
+//functionality of the method  
+}  
+}  
+
+
+The above code snippet violates the single responsibility principle. To achieve the goal of the principle,
+ we should implement a separate class that performs a single functionality only.
+
+Student.java
+
+public class Student  
+{  
+public void addStudent();  
+{  
+//functionality of the method  
+}  
+}  
+PrintStudentDetails.java
+
+public class PrintStudentDetails  
+{  
+public void printDetails();  
+{  
+//functionality of the method  
+}  
+}  
+Percentage.java
+
+public class Percentage  
+{  
+public void calculatePercentage();  
+{  
+//functionality of the method  
+}  
+}  
+Hence, we have achieved the goal of the single responsibility principle by separating the functionality into three separate classes.
+
+
+Open-Closed Principle:
+
+The application or module entities the methods, functions, variables, etc.
+: The open-closed principle states that 
+according to new requirements the module should be open for extension but closed for modification. The extension allows 
+us to implement new functionality to the module. Let's understand the principle through an example.
+
+Suppose, VehicleInfo is a class and it has the method vehicleNumber() that returns the vehicle number.
+VehicleInfo.java
+public class VehicleInfo  
+{  
+   public double vehicleNumber(Vehicle vcl)   
+   {  
+       if (vcl instanceof Car)    
+       {  
+            return vcl.getNumber();  
+      if (vcl instanceof Bike)   
+     {  
+         return vcl.getNumber();  
+      } 
+}  
+
+
+If we want to add another subclass named Truck, simply, we add one more if statement that violates the open-closed principle. 
+The only way to add the subclass and achieve the goal of principle by overriding the vehicleNumber() method, as we have shown below.
+
+VehicleInfo.java
+public class VehicleInfo   
+{  
+   public double vehicleNumber()   
+   {  
+     //functionality   
+  }  
+}  
+public class Car extends VehicleInfo   
+{  
+    public double vehicleNumber()   
+   {  
+     return this.getValue();  
+  }  
+public class Car extends Truck   
+{  
+    public double vehicleNumber()   
+    {  
+         return this.getValue();  
+   }  
+}
+
+
+Liskov Substitution Principle:-  
+
+It extends the Open/Closed Principle by focusing on the behavior of a superclass and its subtypes.
+ It applies to inheritance in such a way that the derived classes must be completely substitutable for their base classes.
+In other words, if class A is a subtype of class B, then we should be able to replace B with A without interrupting the behavior of the program.
+
+public class Student   
+{  
+	private double height;  
+	private double weight;  
+	public void setHeight(double h)   
+	{   
+     		 height = h;   
+	}  
+   	public void setWeight(double w)   
+   	{   
+       	   weight= w;   
+  	}  
+...  
+}  
+public class StudentBMI extends Student  
+{  
+    public void setHeight(double h)   
+   {  
+    super.setHeight(h);  
+     super.setWeight(w);  
+   }  
+   public void setWeight(double h)   
+   {  
+    super.setHeight(h);  
+    super.setWeight(w);  
+  }  
+}  
+The above classes violated the Liskov substitution principle because the StudentBMI class has extra constraints i.e. height and weight that must be the same.
+ Therefore, the Student class (base class) cannot be replaced by StudentBMI class (derived class).
+Hence, substituting the class Student with StudentBMI class may result in unexpected behavior.
+
+Interface Segregation Principle:
+The principle states that the larger interfaces split into smaller ones. Because the implementation classes use only the methods that are 
+required. We should not force the client to use the methods that they do not want to use.
+The goal of the interface segregation principle is similar to the single responsibility principle. Let's understand the principle through an example.
+Suppose, we have created an interface named Conversion having three methods intToDouble(), intToChar(), and charToString().
+
+public interface Conversion  
+{  
+public void intToDouble();  
+public void intToChar();  
+public void charToString();  
+}  
+
+The above interface has three methods. If we want to use only a method intToChar(), we have no choice to implement the single method. To overcome the problem,
+ the principle allows us to split the interface into three separate ones.
+
+public interface ConvertIntToDouble  
+{  
+public void intToDouble();  
+}   
+public interface ConvertIntToChar  
+{  
+public void intToChar();  
+}  
+public interface ConvertCharToString   
+{  
+public void charToString();  
+}  
+
+Now we can use only the method that is required. Suppose, we want to convert the integer to double and character to string then, we will use only the methods intToDouble() and charToString().
+
+public class DataTypeConversion implements ConvertIntToDouble, ConvertCharToString   
+{  
+public void intToDouble()  
+{  
+//conversion logic  
+}  
+public void charToString()  
+{  
+//conversion logic  
+}  
+}  
+
+Dependency Inversion Principle:-
+public class WindowsMachine  
+{  
+public final keyboard;  
+public final monitor;  
+public WindowsMachine()  
+{  
+monitor = new monitor();  //instance of monitor class  
+keyboard = new keyboard(); //instance of keyboard class  
+}  
+}  
+
+Now we can work on the Windows machine with the help of a keyboard and mouse. But we still face the problem. Because we have 
+tightly coupled the three classes together by using the new keyword. It is hard o test the class windows machine.
+
+To make the code loosely coupled, we decouple the WindowsMachine from the keyboard by using the Keyboard interface and this keyword.
+
+Keyboard.java
+
+public interface Keyboard   
+{   
+//functionality  
+}  
+WindowsMachine.java
+
+public class WindowsMachine  
+{  
+   private final Keyboard keyboard;  
+   private final Monitor monitor;  
+   public WindowsMachine(Keyboard keyboard, Monitor monitor)   
+   {  
+        this.keyboard = keyboard;  
+        this.monitor = monitor;  
+   }  
+}  
+In the above code, we have used the dependency injection to add the keyboard dependency in the WindowsMachine class. Therefore, we have decoupled the classes.
+
+JDK,JRE and JVM difference:
+
+1. JDK (Java Development Kit) is a Kit that provides the environment to develop and execute(run) the Java program. 
+JDK is a kit(or package) that includes two things
+(Development tools+JRE)
+Development Tools(to provide an environment to develop your java programs)
+JRE (to execute your java program).
+2. JRE (Java Runtime Environment) is an installation package that provides an environment to only run(not develop) the java program(or application)
+onto your machine. JRE is only used by those who only want to run Java programs that are end-users of your system.
+   ( +JVM)
+3. JVM (Java Virtual Machine) is a very important part of both JDK and JRE because it is contained or inbuilt in both. 
+Whatever Java program you run using JRE or JDK goes into JVM and JVM is responsible for executing the java program line by line, 
+hence it is also known as an interpreter.
+
+JVM architucture:
+
+What are the 3 components of JVM?
+The JVM consists of three distinct components:
+ 1.Class Loader.
+ 2.Runtime Memory/Data Area.
+ 3.Execution Engine.
+
+
+https://www.youtube.com/results?search_query=jvm+architecture+in+java+by+durga+
+https://www.youtube.com/watch?v=eaAqwTdUAAo
+
+fiboseries program: 
+class FibonacciExample1{
+public static void main(String args[])
+{  
+ int n1=0,n2=1,n3,i,count=10;  
+ System.out.print(n1+" "+n2);//printing 0 and 1  
+  
+ for(i=2;i<count;++i)//loop starts from 2 because 0 and 1 are already printed  
+ {  
+  n3=n1+n2;  
+  System.out.print(" "+n3);  
+  n1=n2;  
+  n2=n3;  
+ }  
+
+}}
+
+checking file created or not
+mport java.io.File;
+
+public class Main {
+   public static void main(String[] args) {
+      File file = new File("C:/java.txt");
+      System.out.println(file.exists());
+   }
+}
+unit 
+one jar reading using maven?
+
+deadlock:-
+Deadlock in java is a programming situation where two or more threads are blocked forever. Java deadlock situation arises with at least 
+two threads and two or more resources.
+Deadlock in Java is a part of multithreading. Deadlock can occur in a situation when a thread is waiting for an object lock, that is acquired by 
+another thread and second thread is waiting for an object lock that is acquired by first thread. Since, both threads are waiting for each other to release 
+the lock, the condition is called deadlock.
+Example:
+package com.sawan;
+
+public class DeadLockTest {
+
+	public static Object Lock1 = new Object();
+	public static Object Lock2 = new Object();
+
+	public static void main(String[] args) {
+
+		ThreadDemo1 T1 = new ThreadDemo1();
+		ThreadDemo2 T2 = new ThreadDemo2();
+		T1.start();
+		T2.start();
+	}
+
+	private static class ThreadDemo1 extends Thread {
+		public void run() {
+			synchronized (Lock1) {
+				System.out.println("Thread 1: Holding lock 1...");
+
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+				}
+
+				System.out.println("Thread 1: Waiting for lock 2...");
+
+				/*synchronized (Lock2) {
+					System.out.println("Thread 1: Holding lock 1 & 2...");
+				}*/
+			}
+		}
+	}
+
+	private static class ThreadDemo2 extends Thread {
+		public void run() {
+			synchronized (Lock1) {
+				System.out.println("Thread 2: Holding lock 1...");
+
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+				}
+				System.out.println("Thread 2: Waiting for lock 2...");
+
+				synchronized (Lock2) {
+					System.out.println("Thread 2: Holding lock 1 & 2...");
+				}
+			}
+		}
+	}
+}
+
+externlization interface:-
+Externalization serves the purpose of custom Serialization, where we can decide what to store in stream.
+Externalizable interface present in java.io, is used for Externalization which extends Serializable interface. It consist of two methods
+ which we have to override to write/read object into/from stream which are-  
+
+// to read object from stream
+void readExternal(ObjectInput in) 
+
+// to write object into stream
+void writeExternal(ObjectOutput o
+
+** Can we have a try block without a catch block in Java?:
+Yes, It is possible to have a try block without a catch block by using a final block.
+As we know, a final block will always execute even there is an exception
+ans:
+public class TryBlockWithoutCatch {
+   public static void main(String[] args) {
+      try {
+         System.out.println("Try Block");
+      } finally {
+         System.out.println("Finally Block");
+      }
+   }
+}
+
+A Java Cursor is an Iterator, which is used to iterate or traverse or retrieve a Collection or Stream object’s elements one by one. 
+In this article, we will learn about Java Iterators and it’s working.
+Types of Cursors in Java
+There are three cursors in Java as mentioned below
+Iterator
+Enumeration
+ListIterator
+
+Difference Between LinkedHashMap and HashMap
+
+The LinkedHashMap is an alternative to HashMap with some additional features. The following are some major differences between LinkedHashMap and HashMap:
+
+The Major Difference between the HashMap and LinkedHashMap is the ordering of the elements. The LinkedHashMap provides a way to order and trace the elements. 
+1. Comparatively, the HashMap does not support the ordering of the elements. In LinkedHashMap, if we iterate an element, we will get a key in the order 
+in which the elements were inserted.
+2. The HashMap and LinkedHashMap both allow only one null key and multiple values.
+3. The HashMap extends AbstractMap class and implements Map interface, whereas the LinkedHashMap extends HashMap class and implements Map interface.
+Both LinkedHashMap and HashMap are non-synchronized, but they can be synchronized using the Collections.synchronizedMap() method.
+
+4. The HashMap uses a bucket to store the elements, which is an index of the array like bucket0 means index[0], bucket1 means index[1], and so on, of the array.
+ Whereas the LinkedHashMap uses the same internal implementation as HashMap but, Apart from that, it also uses a doubly-linked through all of its entries. 
+This linked list is useful for ordering the elements.
+
+5. The HashMap requires low memory than LinkedHashMap; because the LinkedHashMap uses the same implementation process as HashMap; additionally, it uses a doubly
+ LinkedList to maintain the order of the elements.
+Both the LinkedHashMap and HashMap provides similar performance.
+
+What's the Difference Between Iterator and ListIterator?
+ans: 
+Iterator :Java Iterator is an interface	
+Can traverse elements present in Collection only in the forward direction.	
+Indexes cannot be obtained by using Iterator.	.
+Cannot modify or replace elements present in Collection
+Cannot add elements and it throws ConcurrentModificationException.	
+Certain methods of Iterator are next(), remove() and hasNext().
+import java.util.*;
+public class IteratorTest {
+   public static void main(String[] args) {  
+      List<String> listObject = new ArrayList<String>();
+      listObject.add("India");
+      listObject.add("Australia");
+      listObject.add("England");
+      listObject.add("Bangladesh");
+      listObject.add("South Africa");
+      Iterator it = listObject.iterator();
+      while (it.hasNext()) {
+         System.out.println(it.next());
+      }
+   }
+}
+
+ListIterator:interface in Collection API
+Can traverse elements present in Collection both in forward and backward directions.
+Can only traverse List and not the other two.
+It has methods like nextIndex() and previousIndex() to obtain indexes of elements at any time while traversing List.
+We can modify or replace elements with the help of set(E e)
+Can easily add elements to a collection at any time.
+Certain methods of ListIterator are next(), previous(), hasNext(), hasPrevious(), add(E e).
+import java.util.*;
+public class ListIteratorTest {
+   public static void main(String[] args) {
+      List<String> listObject = new ArrayList<String>();
+      listObject.add("Java");
+      listObject.add("Selenium");
+      listObject.add("Python");
+      listObject.add("Java Script");
+      listObject.add("Cloud Computing");
+      ListIterator it = listObject.listIterator();
+      System.out.println("Iterating the elements in forward direction: ");
+      while (it.hasNext()) {
+         System.out.println(it.next());
+      }
+      System.out.println("--------------------------------------------");
+      System.out.println("Iterating the elements in backward direction: ");
+      while (it.hasPrevious()) {
+         System.out.println(it.previous());
+      }
+   }
+}
+
+Enumerator: Interface 
+Enumeration is used to traverse the legacy classes like Vector, Stack and HashTable. Iterator is used to iterate most of the classes 
+in the collection framework like ArrayList, HashSet, HashMap, LinkedList etc
+Enumeration can’t make structural changes in the collection because it has read-only access to the element in the collection. It has the following methods :
+*hasMoreElements()
+*nextElement()
+
+On the other hand, an iterator can read and remove the element in the collection. It has the following methods −
+*hasNext()
+*next()
+*remove()
+Example of Enumeration
+class EnumerationExample {
+   public static void main(String args[]) {
+      List list = new ArrayList(Arrays.asList( new String[] {"Apple", "Cat", "Dog", "Rat"}));
+      Vector v = new Vector(list);
+      delete(v, "Dog");
+   }
+   private static void delete(Vector v, String name) {
+      Enumeration e = v.elements();
+      while (e.hasMoreElements()) {
+         String s = (String) e.nextElement();
+         if (s.equals(name)) {
+            v.remove(name);
+         }
+      }
+      // Display the names
+      System.out.println("The names are:");
+      e = v.elements();
+      while (e.hasMoreElements()) {
+         // Prints elements
+         System.out.println(e.nextElement());
+      }
+   }
+
+differece between collection.syncronized map and concurrenthashmap:
+ans:
+synchronizedMap() requires each thread to acquire a lock on the entire object for both read/write operations. By comparison, 
+the ConcurrentHashMap allows threads to acquire locks on separate segments of the collection, and make modifications at the same time.
+       Concurrent Hashmap is a class that was introduced in jdk1.5.  Concurrent hash map applies locks only at bucket level called fragment while adding or
+updating the map. So, a concurrent hash map allows concurrent read and write operation to the map. 
+Synchronized hashmap(Collection.syncronizedHashMap()) is a method of Collection framework. This method applies a lock on the entire collection. So, if one thread is
+accessing the map then no other thread can access the same map. 
+
+ConcurrentHashMap:
+ConcurrentHashMap is a class that implements the ConcurrentMap and serializable interface.
+It locks some portion of the map.	
+ConcurrentHashMap allows performing concurrent read and write operation. Hence, performance is relatively better than the Synchronized Map.
+ConcuurentHashMap doesn’t allow inserting null as a key or value.
+ConccurentHashMap doesn’t throw ConcurrentModificationException.
+
+   * concurrent hasMap allow to do 16 different thread write operation by default. and any operation has no lock .any number of thread can read data on same segment(bucket)
+write operation of thread t1 is goinng on on segement (A) then segement A will be lock and other thread can not do write operation on same segment.
+
+Synchronized HashMap:
+We can synchronize the HashMap by using the synchronizedMap() method of java.util.Collections class.
+(Collections.synchronizedMap(laptopmap)
+It locks the whole map.
+In Synchronized HashMap, multiple threads can not access the map concurrently. Hence, the performance is relatively 
+less than the ConcurrentHashMap.
+Synchronized HashMap allows inserting null as a key.
+Synchronized HashMap throw ConcurrentModificationException.
+
+
+
+𝐦𝐞𝐦𝐨𝐫𝐲 𝐥𝐞𝐚𝐤 𝐚𝐧𝐝 𝐡𝐨𝐰 𝐭𝐨 𝐡𝐚𝐧𝐝𝐥𝐞 𝐢𝐭:
+Java provides out-of-box memory management. When we create an object using the new keyword, the JVM automatically allocates memory for that object. 
+If the object is no longer is used by the application, the garbage collector automatically removes that object and free up space for other applications. 
+Therefore, the programmer need not to manage memory manually like other procedural programming languages (C, and C++). Nevertheless, there is a chance of memory 
+leak in a Java application. In this section, we will understand what is a memory leak in Java, its causes, detect and fixing of memory leaks.
+
+In Java, the memory leak is a situation when the garbage collector does not recognize the unused objects and they remain in the memory indefinitely that reduces 
+the amount of memory allocated to the application. Because the unused objects still being referenced that may lead to OutOfMemoryError. It also affects the reliability
+of the application. The following figure represents the memory leak.
+ The performance of the application consistently decreases.
+The usage of memory increases during the life span of an application.
+𝐑𝐄𝐀𝐒𝐎𝐍 𝐅𝐎𝐑 𝐌𝐄𝐌𝐎𝐑𝐘 𝐋𝐄𝐀𝐊
+ Using Unwanted Object Reference: 
+These are the object references that are no longer needed. The garbage collector is failed to
+ reclaim the memory because another object still refers to that unwanted object.
+Using Long-live Static Objects: 
+Using static objects also leads to a memory leak. Because they live in the memory till the application's life span.
+Failure to Clean-up Native System Resources: Native system resources allocated by a function external to Java. It is written in C and C++. JNI APIs are used to 
+embed native libraries in the Java code.
+Bugs in the Third-party Libraries:
+Bugs in AWT and Java Swing packages are another cause of memory leak.
+
+
+Preventing Memory Leak
+While writing code, remember the following points that prevent the memory leak in Java.
+Do not create unnecessary objects.
+Avoid String Concatenation.
+Use String Builder.
+Do not store a massive amount of data in the session.
+Time out the session when no longer used.
+Do not use the System.gc() method.
+Avoid the use of static objects. Because they live for the entire life of the application, by default. So, it is better to set the reference to null, explicitly.
+Always close the ResultSet, Statements, and Connection objects in the finally block.
+
+advantage && disadvantage of solid principle:
+SOLID principles | Advantages
+Increased maintainability
+Improved readability
+Increased scalability
+Better testability
+Reduced coupling
+Enhanced reusability
+Better performance
+
+SOLID principles | Disadvantages
+Increased complexity
+More classes and interfaces
+Over-engineering
+Difficulty in understanding
+Additional time and effort required
+Limited use-cases
+Limited flexibility
+
+advantage and disadvantage of microservice
+Microservices are self-contained, independent deployment module.
+The cost of scaling is comparatively less than the monolithic architecture.
+Microservices are independently manageable services. It can enable more and more services as the need arises. It minimizes the impact on existing service.
+It is possible to change or upgrade each service individually rather than upgrading in the entire application.
+Microservices allows us to develop an application which is organic (an application which latterly upgrades by adding more functions or modules) in nature.
+It enables event streaming technology to enable easy integration in comparison to heavyweight interposes communication.
+Microservices follows the single responsibility principle.
+The demanding service can be deployed on multiple servers to enhance performance.
+Less dependency and easy to test.
+Dynamic scaling.
+Faster release cycle.
+
+ disadvantage of microservice
+Microservices has all the associated complexities of the distributed system.
+There is a higher chance of failure during communication between different services.
+Difficult to manage a large number of services.
+The developer needs to solve the problem, such as network latency and load balancing.
+Complex testing over a distributed environment.
+
+srink beteen hashcode and equals method.
+What is the contract between equals and hashCode in Java?
+hashCode() and equals() contract
+The basic rule of the contract states that if two objects are equal to each other based on equals() method,
+ then the hash code must be the same, but if the hash code is the same, then equals() can return false.
+
+Stack:
+The stack is a linear data structure that is used to store the collection of objects. It is based on Last-In-First-Out (LIFO). 
+Java collection framework provides many interfaces and classes to store the collection of objects. One of them is the Stack class that provides
+ different operations such as push, pop, search, etc.
+In this section, we will discuss the Java Stack class, its methods, and implement the stack data structure in a Java program. But before moving to
+ the Java Stack class have a quick view of how the stack works.
+The stack data structure has the two most important operations that are push and pop. The push operation inserts an element into the stack and pop 
+operation removes an element from the top of the stack. Let's see how they work on stack.
+
+Queue:
+The interface Queue is available in the java.util package and does extend the Collection interface. It is used to keep the elements that are processed in the 
+First In First Out (FIFO) manner. It is an ordered list of objects, where insertion of elements occurs at the end of the list, and removal of elements occur at
+ the beginning of the list.
+Being an interface, the queue requires, for the declaration, a concrete class, and the most common classes are the LinkedList and PriorityQueue in Java.
+ Implementations done by these classes are not thread safe. If it is required to have a thread safe implementation, PriorityBlockingQueue is an available option.
+Features of Queue:  
+1. PriorityQueue, ArrayBlockingQueue and LinkedList are the implementations that are used most frequently.
+2. The NullPointerException is raised, if any null operation is done on the BlockingQueues.
+3.Those Queues that are present in the util package are known as Unbounded Queues.
+4.Those Queues that are present in the util.concurrent package are known as bounded Queues.
+5.Those Queues that are present in the util.concurrent package are known as bounded Queues.
+All Queues barring the Deques facilitates removal and insertion at the head and tail of the queue; respectively. In fact, deques support element insertion and
+ removal at both ends.
+
+boolean add(object)	It is used to insert the specified element into this queue and return true upon success.
+boolean offer(object)	It is used to insert the specified element into this queue.
+Object remove()	It is used to retrieves and removes the head of this queue.
+Object poll()	It is used to retrieves and removes the head of this queue, or returns null if this queue is empty.
+Object element()	It is used to retrieves, but does not remove, the head of this queue.
+Object peek()	It is used to retrieves, but does not remove, the head of this queue, or returns null if this queue is empty.
+
+we maintain two pointers, front, and rear. The front points to the first item of the queue and rear points to the last item.
+
+enQueue(): This operation adds a new node after the rear and moves the rear to the next node.
+deQueue(): This operation removes the front node and moves the front to the next node.13:53 11-12-2023
+
+Some of the frequently used Queue implementation classes are
+1. LinkedList, 
+2.PriorityQueue, 
+3.ArrayBlockingQueue,
+4. DelayQueue, 
+5.LinkedBlockingQueue, 
+6.PriorityBlockingQueue etc… 
+AbstractQueue provides a skeletal implementation of the Queue interface to reduce the effort in implementing Queue
+
+//Queue<Integer> q = new LinkedList();
+    Queue<Integer> q = new ArrayDeque();
+
+In terms of efficiency, ArrayDeque is more efficient than the LinkedList for add and remove operation at both ends. 
+The best operation in a LinkedList implementation is removing the current element during the iteration. LinkedList implementations are not ideal structures to iterate
+
+If you need add/remove of the both ends, ArrayDeque is significantly better than a linked list. Random access each element is also O(1) for a cyclic queue.
+The only better operation of a linked list is removing the current element during iteration.
+
+difference between shallow and deep cloning in java:
+In shallow cloning : dependent class reference is clone not property value
+Shallow: 
+1. Shallow Copy stores the references of objects to the original memory address. 
+2. Shallow Copy reflects changes made to the new/copied object in the original object.
+3.Shallow Copy stores the copy of the original object and points the references to the objects.
+4. A shallow copy is faster
+Deep shallow::
+1.Deep copy stores copies of the object’s value.
+2. Deep copy doesn’t reflect changes made to the new/copied object in the original object.
+3.Deep copy stores the copy of the original object and recursively copies the objects as well.
+4.Deep copy is comparatively slower.object cloning in java
+ 
+https://www.youtube.com/watch?v=mf0jQijo9C4&list=RDCMUCyBR6tE6at5Fw490KKEM1nA&start_radio=1
+
+Abstract class?
+1. using abstract keyword
+2.subclass extends abstract class
+3.Abstract class can have implemented methods and 0 or more abstract methods.
+4.we can extends only one abstract class.
+
+Interface:
+1. interface keyword
+2. subclass implements interface
+3.java8 onward interface can have default and static methods.
+4.we can implements multiple interfaces.s
+
+Differences Between Interface And Abstract Class After Java 8 :
+1) Fields
+Interface fields are public, static and final by default. Interfaces still don’t support non-static and non-final variables. Interfaces can only have public, 
+static and final variables. On the other hand, abstract class can have static as well as non-static and final as well as non-final variables. 
+They also support private and protected variables along with public variables.
+2) Methods
+After Java 8, an interface can have default and static methods along with abstract methods. Interfaces don’t support final methods. But, abstract classes
+ support final as well as non-final methods and static as well as non-static methods along with abstract methods.
+Also note that, only interfaces can have default methods. Abstract classes can’t have default methods.
+3) Constructors
+Interfaces can’t have constructors. Abstract classes can have any number of constructors.  
+4) Member’s Accessibility
+All members of interfaces are public by default. Interfaces don’t support private and protected members. But, abstract classes support all type 
+of members – private, protected and public members.
+5) Multiple Inheritance
+A class can extend only one abstract class, but can implement multiple interfaces. Thus, a class can inherit multiple properties from multiple sources only
+through interfaces, not through abstract classes.
+Interface Vs Abstract Class After Java 8 :
+The below table and program summarizes the similarities and differences between interface and abstract class after Java 8.
+
+When to use abstract class and when to use interface?
+When to use an abstract class:
+1. An abstract class is a good choice if we are using the inheritance concept since it provides a common base class implementation to derived classes.
+2.  An abstract class is also good if we want to declare non-public members. In an interface, all methods must be public.
+3. If we want to add new methods in the future, then an abstract class is a better choice. Because if we add new methods to an interface, then all of the classes 
+   that already implemented that interface will have to be changed to implement the new methods.
+4.Abstract classes have the advantage of allowing better forward compatibility. Once clients use an interface, we cannot change it; if they use an abstract class,
+    we can still add behavior without breaking the existing code.
+5.If we want to provide common, implemented functionality among all implementations of our component, use an abstract class. Abstract classes allow us to 
+partially implement our class, whereas interfaces contain no implementation for any members.
+
+abstract class Car {
+   public void accelerate() {
+      System.out.println("Do something to accelerate");
+   }
+   public void applyBrakes() {
+      System.out.println("Do something to apply brakes");
+   }
+   public abstract void changeGears();
+}
+
+class Alto extends Car {
+   public void changeGears() {
+      System.out.println("Implement changeGears() method for Alto Car");
+   }
+}
+class Santro extends Car {
+   public void changeGears() {
+      System.out.println("Implement changeGears() method for Santro Car");
+   }
+
+when to use interface:
+1.Interfaces are a good choice when we think that the API will not change for a while.
+2.Interfaces are also good when we want to have something similar to multiple inheritances since we can implement multiple interfaces.
+3.If we are designing small, concise bits of functionality, use interfaces. If we are designing large functional units, use an abstract class.
+public interface Actor {
+   void perform();
+}
+public interface Producer {
+   void invest();
+}
+
+Interfaces are a kind of code contract, which must be implemented by a concrete class.
+Abstract classes are similar to normal classes, with the difference that they can include abstract methods, which are methods without a body. 
+Abstract classes cannot be instantiated.
+Many developers believe that interfaces and abstract classes are similar, but they are actually quite different. 
+Let's explore the main differences between them.
+
+The essence of an interface in Java
+At heart, an interface is a contract, so it depends on an implementation to serve its purpose. An interface can never have a state, 
+so it cannot use mutable instance variables. An interface can only use final variables.
+
+Table 1. Comparing interfaces and abstract classes in Java
+Interfaces                                                                                                                                           Abstract classes
+Can only have final static variables. An interface can never change its own state.           Can have any kind of instance or static variables, mutable or immutable.
+A class can implement multiple interfaces.                                                                           A class can extend only one abstract class.
+Can be implemented with the implements keyword. An interface can also extend interfaces.     Can only be extended.
+Can only use static final fields, parameters, or local variables for methods.
+
+Only functional interfaces can use the lambda feature in Java.
+
+Abstract classes with only one abstract method cannot use lambdas.
+
+Can't have constructor.
+
+Can have constructor.
+
+Can have abstract methods.
+
+Can have default and static methods (introduced in Java 8).
+
+Can have private methods with the implementation (introduced in Java 9).
+
+Can have any kind of methods.
+
+
+m,  b
+difference b/w kafka and aws
+.lamda in aws
+STATIC VARIABLE ON SERIALIZABLE
+
+https://mail.google.com/mail/u/0/#search/test/FMfcgzGwHzDpCgnzdmGHnTnPHdVlTqzr
+
+**https://www.geeksforgeeks.org/data-structures/?ref=shm -- dsa	

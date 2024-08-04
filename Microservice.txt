@@ -1,0 +1,175 @@
+
+Saga Design pattern:-
+You have applied the Database per Service pattern. Each service has its own database. Some business transactions, 
+however, span multiple service so you need a mechanism to implement transactions that span services. For example, let’s
+ imagine that you are building an e-commerce store where customers have a credit limit. The application must ensure that 
+a new order will not exceed the customer’s credit limit. Since Orders and Customers are in different databases owned by different
+ services the application cannot simply use a local ACID transaction.
+
+**********
+In microservice world, it is common that transactions may take long journey for it to complete. having multiple databases and 
+communicating with multiple services makes more complex and make it difficult to keep the consistency of data. local ACID transactions also 
+wont help if the communication happens between separate services with multiple databases.
+
+How do we maintain the consistency of data across multiple services?
+Two-Phase Commit ?
+Two phase commit (2PC) is a well known algorithm to achieve the benefits of ACID. Handling 2PC is not that simple. 
+2PC consists of two stages, one is “PREPARE” and “COMMIT”.
+
+SAGA Pattern ?
+SAGA is one of the best way to ensure the consistency of the data in a distributed architecture without having 
+a single ACID transaction.
+** SAGA commits multiple compensatory transactions at different stages ensuring to rollback when required. SAGA introduce the master process
+ called “Saga Execution Coordinator” or SEC.
+
+*** Transactions are an essential part of applications. Without them, it would be impossible to maintain data consistency.
+
+There are different approaches to the implementation of SAGA design patterns but, mostly two are used, which has been explained by the Spring Boot developers.
+
+
+1. Event-based Approach/choreography-based approach
+2. Orchestration-based Approach/ command based approach
+
+ Event-based Approach/choreography-based approach
+Event-based Approach
+The event-based approach is also called the choreography-based approach. So, if you recall the same use case that I already mention 
+earlier i.e. of online purchase of stocks. We have UI service StockManagement service, Payment service and Notification service. 
+In the case of the event-based approach, each of the microservice generates an event and another microservice listened to that 
+event and performs an action based on the event generation. Again, when a user tries to purchase the stock, it will first go through 
+with a UI service. The UI service in case of event-based approach implementation generates an event called selectStock() and the 
+StockManagement service listens to this event. So, on listening to this event, the stock is selected, and it will further generate 
+the makePayment() event. Now the payment service will listen to makePayment() event and after the success or the failure of the payment, 
+the payment service will generate a paymentNotification() event. This payment notification event will contain either success or failure. 
+The Notification service will listen to this paymentNotification event, and the Notification service generates an event called purchaseComplete()
+ in case of success, it is stock purchased successfully, and in case of failure, it will be stock purchased failure and finally, the UI service 
+listened to the Notification service.
+
+
+**** Here simply, they are one-to-one relations between events and the Microservices. It may happen that one of your microservice is creating an event 
+and multiple microservices are listening to that event. It may kind of create a cyclic dependency between the microservices and this could be a 
+disadvantage of the event or choreography-based approach. In an Event-based approach, each of the local transactions after successful completion will
+ publish the event that is called domain event, which in turn invokes the local transaction in further succeeding services.
+
+Rollback/Failure Scenario
+If there is a failure in the case of an event-based approach. Let me explain now in case of failure of the transaction, we have to prepare for rollback 
+or compensating action. But remember roll back and compensation both are different terms. By the term rollback we mean we are trying to revert the transaction 
+as if it had never happened but in case of compensating, we are admitting that a transaction has happened and it has failed and we are trying to do something 
+else to compensate that transaction. Assume here at the payment service, your money is deducted but due to some reason, the transaction failed. So, the payment 
+service will generate an event called makePaymenetFailed() and as the money has been deducted from your account and the payment is also getting failed and to 
+compensate this action, this event should be listened to by notification service and by the payment service to revert the deducted amount. So, the 
+makePaymenetFailed() event will listen by the payment service and that will return or refund to the user or any the microservice that is doing this process
+ and simultaneously by the notification service that payment has failed. After the paymentReceivedFailed() event by the notification service, the notification 
+service will generate an event called stockPurchaseFailed() that will be listened to by the UI service and the response will finally display to the user.
+
+
+ 
+Orchestration-based Approach:   or command-based Approach
+
+n Orchestration or command-based pattern or approach, the microservices do not directly interact with each other. Instead of that,
+ we have a common orchestrator to perform such action. Again, taking the same case of online stock purchase. The user invokes the request 
+for online purchase of stock it will go through UI service. UI service will generate a command purchaseStock(). Instead of directly going 
+through the StockManagement service, the request will go through a central Orchestrator.
+
+The orchestrator on receiving of purchaseStock() command will generate the command selectStock(), and this command will be listened to by 
+the stock management service in the backend, and the stock service will reply, with the next command saying stockChoosen(), and again this will go 
+to the orchestrator.
+
+*********
+Upon receiving of stockChoosen() command, Orchestrator will further generate another command saying makePayment() and it will be listened to by your 
+payment service. When the payment service will process the payment transaction then on success or failure of the transaction, it will generate a command called 
+“paymentNotification()”. If the payment is successful and this response will be listened to by the Orchestrator and upon receiving this response, the orchestrator
+ will further generate the next command called PaymentReceived() for the notification service. This payment confirmation will be listened to by the notification 
+service and the notification service give a response to the orchestrator.
+
+If the payment is successful, then the stockPurchaseSuccessful() command is sent to the orchestrator and the orchestrator again responds to the UI 
+service that the stock is purchased successfully, and it will be displayed on the user screen.
+
+If you look at the above diagram, in an orchestrated-based approach, there is a central Orchestrator. This Orchestrator is an additional service 
+that we have implemented apart from the purchase-Stock architecture. So, this is an extra overhead in case we are going to implement an Orchestrator 
+or command based. If I mention the implementation of Orchestrator, it could be an orchestrating tool like Camunda or you can use a Finite-state machine in 
+Java to build this Orchestrator.
+
+*********   There are two ways to achieve sagas:
+Choreography : each local transaction publishes domain events that trigger local transactions in other services.
+Orchestration : an orchestrator (object) tells the participants what local transactions to execute.
+
+Orchestration-based saga
+The best option would be using an orchestration process. we define a new service (SEC) with the sole responsibility of telling each service what 
+to do and when. SEC orchestrates sequence of commands notifying other services what operations are required to perform. we also could use event 
+based communication between services to accommodate resubmitting or rollback the local transactions.
+
+
+
+ELK: Elasticsearch, Logstash, and Kibana:-
+The ELK Stack is a collection of three open-source products — Elasticsearch, Logstash, and Kibana. ELK stack provides centralized 
+logging in order to identify problems with servers or applications
+
+*******  It allows you to search all the logs in a single place. It also helps to find issues in multiple servers by connecting logs during a specific time frame.
+E stands for ElasticSearch: used for storing logs
+L stands for LogStash : used for both shipping as well as processing and storing logs
+K stands for Kibana: is a visualization tool (a web interface) which is hosted through Nginx or Apache
+lasticSearch, LogStash and Kibana are all developed, managed ,and maintained by the company named Elastic.
+
+Elasticsearch is a NoSQL database.It is based on Lucene search engine, and it is built with RESTful APIS.
+Elasticsearch also allows you to store, search and analyze big volume of data. It is mostly used as the underlying engine to powers 
+applications that completed search requirements.
+
+Advantages of Elasticsearch
+Store schema-less data and also creates a schema for your data
+Manipulate your data record by record with the help of Multi-document APIs
+Perform filtering and querying your data for insights
+Based on Apache Lucene and provides RESTful API
+Provides horizontal scalability, reliability, and multitenant capability for real time use of indexing to make it faster search
+Helps you to scale vertically and horizontally
+
+
+What is Logstash?
+Logstash is the data collection pipeline tool. It collects data inputs and feeds into the Elasticsearch. It gathers all types of 
+data from the different source and makes it available for further use.
+
+Advantage of Logstash:
+Offers centralize the data processing
+It analyzes a large variety of structured/unstructured data and events
+ELK LogStash offers plugins to connect with various types of input sources and platforms
+
+What is Kibana?
+Kibana is a data visualization which completes the ELK stack. This tool is used for visualizing the Elasticsearch documents and helps
+ developers to have a quick insight into it. Kibana dashboard offers various interactive diagrams, geospatial data, and graphs to
+ visualize complex quires.
+
+It can be used for search, view, and interact with data stored in Elasticsearch directories. Kibana helps you to perform advanced data analysis and 
+visualize your data in a variety of tables, charts, and maps
+
+
+splunk:
+
+12 factor in microservice:-
+1. codeBase == like git has multile branch
+2. dependency
+3.config
+4. Backing services(any time one db instance ,and increase db instance as required(attach and detach))
+5. Build,Run,Release(biuld,run then release)
+6.Stateless process(data not saved in ui)
+7. port binding(define port no)
+8. concurrency (sacalabilty)
+9.disposability(app should robust, if not save in db and then rollback saving data)
+10.dev-prod parity(same code in dev and prod)
+11.log (login like splunk)
+12.Admin processses(admin management task run)
+
+how to secure data to send:
+use HTTPS:
+   The first and most basic step to secure your rest api is to use https ,which encrypts the data in transit between the server and the client
+    HTTPS prevents attacks from intercepting ,modifying ,or stealing the data that is sent  or received by your rest api
+    to use HTTPS ,you need to obtain a valid SSL certificate from a trusted authority and confiure your server to enfource HTTPS connections.
+we can also use tools like Encrypt or Certbot to automate the process of obtaining and renewing SSL certificates 
+
+
+
+
+
+
+
+
+
+
