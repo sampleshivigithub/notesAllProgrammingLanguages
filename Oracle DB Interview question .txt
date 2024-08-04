@@ -1,0 +1,230 @@
+joins in SQL?
+A JOIN clause is used to combine rows from two or more tables, based on a related column between them.
+Here are the different types of the JOINs in SQL:
+● (INNER) JOIN: Returns records that have matching values in both tables
+● LEFT (OUTER) JOIN: Return all records from the left table, and the matched records from the right table
+● RIGHT (OUTER) JOIN: Return all records from the right table, and the matched records from the left table
+● FULL (OUTER) JOIN: Return all records when there is a match in either left or right table
+
+write  a query to get 3rd highest salaried employee?
+
+SELECT name, salary  FROM Employee e1   WHERE 3-1 = (SELECT COUNT(DISTINCT salary) FROM Employee e2  WHERE e2.salary > e1.salary)
+
+
+SELECT name, salary FROM employee A WHERE n-1 = (SELECT count(1)   FROM employee B  WHERE B.salary>A.salary)
+
+Here N = nth Highest Salary eg. 3rd Highest salary : N=3 .
+SELECT ename,sal from Employee e1 where 
+        N-1 = (SELECT COUNT(DISTINCT sal) from Employee e2 where e2.sal > e1.sal) 
+ 
+secod high :
+SELECT MAX(SALARY) FROM Employees WHERE SALARY < (SELECT MAX(SALARY) FROM Employees);
+
+
+Joining
+We can also update the invoice table based on a customer. First, let's check the data with a simple SELECT query:
+
+select invoice.BillingCity from invoice  inner join customer on invoice.CustomerId=customer.CustomerId
+where customer.City='Vienne'
+
+select * from   toys, bricks where  toy_id = brick_id;
+Using the ANSI way, the join criteria go in the on clause.
+
+select * from   toys  inner  join bricks on     toy_id = brick_id;
+An inner join can return any number of rows from zero to the Cartesian product of the two tables.
+
+The following left joins toys and bricks on their IDs. Toys is on the left side of the join. So the database returns all its rows. You also get the rows 
+from bricks which have the same id as these:
+
+select * from   toys left   outer join bricks on     toy_id = brick_id;
+To outer join with Oracle syntax use the (+) operator. This goes after the columns of the table you want to optionally include. So the following is
+ the same as the previous query:
+
+select * from   toys, 
+where  toy_id = brick_id (+);
+To return all the rows from bricks, you can switch from a left join to a right. Or change the order of the tables in your query:
+
+select * 
+from   toys
+right  join bricks
+on     toy_id = brick_id;
+
+Righ Outer join
+select * 
+from   bricks
+left   join toys
+on     toy_id = brick_id;
+To do the same with Oracle syntax, move the plus to the columns of the toys table:
+
+select * 
+from   toys, bricks where  toy_id (+) = brick_id;
+An outer join will always return all the rows from the preserved table. So the number of rows returned varies from the size of the preserved table to the
+ Cartesian product of the tables.
+
+SQL delete duplicate Rows using Group By and having clause:-
+In this method, we use the SQL GROUP BY clause to identify the duplicate rows. The Group By clause groups data as per the defined columns and we can use the COUNT 
+function to check the occurrence of a row.
+For example, execute the following query, and we get those records having occurrence greater than 1 in the Employee table.
+
+SELECT [FirstName], 
+    [LastName], 
+    [Country], 
+    COUNT(*) AS CNT
+FROM [SampleDB].[dbo].[Employee]
+GROUP BY [FirstName], 
+      [LastName], 
+      [Country]
+HAVING COUNT(*) > 1;
+
+
+To remove this data, replace the first Select with the SQL delete statement as per the following query.
+
+DELETE FROM [SampleDB].[dbo].[Employee]
+    WHERE ID NOT IN
+    (
+        SELECT MAX(ID) AS MaxRecordID
+        FROM [SampleDB].[dbo].[Employee]
+        GROUP BY [FirstName], 
+                 [LastName], 
+                 [Country]
+    );
+
+Display which has duplicate records:
+
+SELECT a.aid,
+    COUNT(*) AS CNT
+FROM artist a
+GROUP BY a.aid      
+HAVING COUNT(*) > 1;
+
+
+Different ways to SQL delete duplicate rows from a SQL Table
+August 30, 2019 by Rajendra Gupta
+ApexSQL pricing
+This article explains the process of performing SQL delete activity for duplicate rows from a SQL table.
+
+Introduction
+We should follow certain best practices while designing objects in SQL Server. For example, a table should have primary keys, identity columns, 
+clustered and non-clustered indexes, constraints to ensure data integrity and performance. Even we follow the best practices, and we might face issues such as
+ duplicate rows. We might also get these data in intermediate tables in data import, and we want to remove duplicate rows before actually inserting them in 
+the production tables.
+
+Suppose your SQL table contains duplicate rows and you want to remove those duplicate rows. Many times, we face these issues. It is a best practice as well 
+to use the relevant keys, constrains to eliminate the possibility of duplicate rows however if we have duplicate rows already in the table. We need to 
+follow specific methods to clean up duplicate data. This article explores the different methods to remove duplicate data from the SQL table.
+
+Let’s create a sample Employee table and insert a few records in it.
+
+CREATE TABLE Employee
+    ( 
+    [ID] INT identity(1,1), 
+    [FirstName] Varchar(100), 
+    [LastName] Varchar(100), 
+    [Country] Varchar(100), 
+    ) 
+    GO 
+    
+    Insert into Employee ([FirstName],[LastName],[Country] )values('Raj','Gupta','India'),
+                                ('Raj','Gupta','India'),
+                                ('Mohan','Kumar','USA'),
+                                ('James','Barry','UK'),
+                                ('James','Barry','UK'),
+                                ('James','Barry','UK')
+In the table, we have a few duplicate records, and we need to remove them.
+
+SQL delete duplicate Rows using Group By and having clause
+In this method, we use the SQL GROUP BY clause to identify the duplicate rows. The Group By clause groups data as per the defined columns and 
+we can use the COUNT function to check the occurrence of a row.
+
+For example, execute the following query, and we get those records having occurrence greater than 1 in the Employee table.
+
+SELECT [FirstName], 
+    [LastName], 
+    [Country], 
+    COUNT(*) AS CNT
+FROM [SampleDB].[dbo].[Employee]
+GROUP BY [FirstName], 
+      [LastName], 
+      [Country]
+HAVING COUNT(*) > 1;
+Sample data
+In the output above, we have two duplicate records with ID 1 and 3.
+
+Emp ID 1 has two occurrences in the Employee table
+Emp ID 3 has three occurrences in the Employee table
+We require to keep a single row and remove the duplicate rows. We need to remove only duplicate rows from the table. For example, the EmpID 1 appears two 
+times in the table. We want to remove only one occurrence of it.
+
+We use the SQL MAX function to calculate the max id of each data row.
+SELECT *
+    FROM [SampleDB].[dbo].[Employee]
+    WHERE ID NOT IN
+    (
+        SELECT MAX(ID)
+        FROM [SampleDB].[dbo].[Employee]
+        GROUP BY [FirstName], 
+                 [LastName], 
+                 [Country]
+    );
+
+
+
+if no unique key
+select * from artist;
+select rowid,s1.* from artist s1 where rowid<(select max(rowid) from artist s2 where s1.aid=s2.aid);
+delete  from artist s1 where rowid<(select max(rowid) from artist s2 where s1.aid=s2.aid);
+
+or
+
+select * from artist;
+select rowid,s1.* from artist s1 where rowid not in (select max(rowid) from artist s2 group by aid);
+delete from  artist s1 where rowid not in (select max(rowid) from artist s2 group by aid);
+
+
+ACID Properties in DBMS:-
+A transaction is a single logical unit of work which accesses and possibly modifies the contents of a database.
+ Transactions access data using read and write operations. 
+In order to maintain consistency in a database, before and after the transaction, certain properties are followed. 
+These are called ACID properties. 
+1) Atomicity:
+2) Consistency: 
+3) Isolation 
+4) Durability: 
+
+1) Atomicity:
+By this, we mean that either the entire transaction takes place at once or doesn’t happen at all.
+ It involves the following two operations. 
+—Abort: If a transaction aborts, changes made to database are not visible. 
+—Commit: If a transaction commits, changes made are visible. 
+Atomicity is also known as the ‘All or nothing rule’. 
+
+2) Consistency:
+ 
+Consistency 
+This means that integrity constraints must be maintained so that the database is consistent before and after the transaction.
+ It refers to the correctness of a database. Referring to the example above, 
+The total amount before and after the transaction must be maintained. 
+Total before T occurs = 500 + 200 = 700. 
+Total after T occurs = 400 + 300 = 700. 
+Therefore, database is consistent. Inconsistency occurs in case T1 completes but T2 fails. As a result T is incomplete. 
+
+
+Isolation 
+This property ensures that multiple transactions can occur concurrently without leading to the inconsistency of database state.
+ Transactions occur independently without interference. Changes occurring in a particular transaction will not be visible to any other
+ transaction until that particular change in that transaction is written to memory or has been committed. This property ensures that the 
+execution of transactions concurrently will result in a state that is equivalent to a state achieved these were executed serially in 
+some order. 
+Let X= 500, Y = 500. 
+Consider two transactions T and T”.
+ 
+Durability: 
+This property ensures that once the transaction has completed execution, the updates and modifications to the database are 
+stored in and written to disk and they persist even if a system failure occurs. These updates now become permanent and are 
+stored in non-volatile memory. The effects of the transaction, thus, are never lost. 
+
+Example 1: In this example, we will find the name starting with H.
+SELECT * FROM department WHERE NAME LIKE 'H%';
+
+Example 1: In this example, we will find the name END with H.
+SELECT * FROM department WHERE NAME LIKE '%H';

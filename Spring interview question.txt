@@ -1,0 +1,21 @@
+@aoundadvice and @before in spring boot
+
+Maxium size for post request:
+The default value of the HTTP and HTTPS connector maximum post size is 2MB. However you can adjust the value as per your requirement.
+
+CROSS JOIN
+Returns a record set in which the number of rows in the left table multiplied by the number of rows in 
+the right table. If WHERE clause is used with CROSS JOIN, it functions like an INNER JOIN. Pictorial representation is given below:
+
+Restful service is stateless:-
+REST uses the HTTP protocol and for this reason it is stateless - but you can keep state by using tokens like JWT for instance, or SESSIONS or something
+
+Yes, in REST applications, each request must contain all of the information necessary to be understood by the server,
+ rather than be dependent on the server remembering prior requests.
+
+Simply put: In REST applications, each request must contain all of the information necessary to be understood by the server, rather than be 
+dependent on the server remembering prior requests.
+Storing session state on the server violates the stateless constraint of the REST architecture. So the session state must be handled entirely by the client.
+Keep reading for more details.
+
+ C28E63E7
